@@ -26,7 +26,8 @@ namespace Proyecto_Calificaciones
 
         private void Consulta_G_Calificaciones_Load(object sender, EventArgs e)
         {
-
+            this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void CargaMaterias()
@@ -161,10 +162,20 @@ namespace Proyecto_Calificaciones
         }
         private void MostrarTabla()
         {
+            AsignarIDMateria();
+
             String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
             Conexion.ConnectionString = CadenaConexion;
 
-            MySqlCommand comandoconsulta = new MySqlCommand("select no_control, concat(apellidos, ' ' ,nombre) as nombre from alumnos where id_asignacion = " + asignacion + " order by concat(apellidos, ' ' ,nombre) desc;");
+            MySqlCommand comandoconsulta = new MySqlCommand("select al.no_control, CONCAT(al.apellidos,' ', al.nombre) as nombre, c.bloque1, c.bloque2, c.bloque3, c.bloque4, c.bloque5, c.observaciones " +
+                "from calificaciones c " +
+                "inner join materias m " +
+                "on c.id_materia = m.id_materia " +
+                "inner join alumnos al " +
+                "on c.no_control = al.no_control " +
+                "where al.id_asignacion = "+ asignacion +" and c.id_materia = " + id_materia + " " +
+                "ORDER by al.apellidos asc;");
+
             comandoconsulta.Connection = Conexion;
             MySqlDataAdapter con = new MySqlDataAdapter(comandoconsulta);
             DataSet Set = new DataSet();
@@ -178,6 +189,22 @@ namespace Proyecto_Calificaciones
             dataGridView1.DataSource = Set.Tables[0];
 
             con.Dispose();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AsignacionID();
+            MostrarTabla();
+        }
+
+        private void comboBox5_DropDown(object sender, EventArgs e)
+        {
+            CargaMaterias();
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

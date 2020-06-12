@@ -68,6 +68,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1240, 494);
             this.dataGridView1.TabIndex = 109;
+            this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             // 
             // button1
             // 
@@ -86,6 +87,7 @@
             this.button2.TabIndex = 107;
             this.button2.Text = "Cargar lista";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // comboBox2
             // 
@@ -147,6 +149,7 @@
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(195, 28);
             this.comboBox5.TabIndex = 102;
+            this.comboBox5.DropDown += new System.EventHandler(this.comboBox5_DropDown);
             // 
             // label19
             // 
@@ -164,9 +167,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(301, 31);
+            this.label1.Size = new System.Drawing.Size(307, 31);
             this.label1.TabIndex = 100;
-            this.label1.Text = "Registrar Calificaciones";
+            this.label1.Text = "Consultar Calificaciones";
             // 
             // Column1
             // 
