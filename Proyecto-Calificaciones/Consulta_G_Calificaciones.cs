@@ -194,161 +194,7 @@ namespace Proyecto_Calificaciones
         private void RegistrarCalificaciones()
         {
             bool bandera = false;
-            try
-            {
 
-                for (int i = 0; i < dataGridView1.RowCount; i++)
-                {
-                    String no_control, comentarios;
-                    String bq1, bq2, bq3, bq4, bq5;
-
-                    AsignacionID();
-                    AsignarIDMateria();
-
-                    bq1 = dataGridView1.Rows[i].Cells[3].Value.ToString();
-                    bq2 = dataGridView1.Rows[i].Cells[4].Value.ToString();
-                    bq3 = dataGridView1.Rows[i].Cells[5].Value.ToString();
-                    bq4 = dataGridView1.Rows[i].Cells[6].Value.ToString();
-                    bq5 = dataGridView1.Rows[i].Cells[7].Value.ToString();
-                    try
-                    {
-                        comentarios = dataGridView1.Rows[i].Cells[8].Value.ToString();
-                    }
-                    catch
-                    {
-                        comentarios = "Ninguno";
-                    }
-                    no_control = dataGridView1.Rows[i].Cells[1].Value.ToString();
-                    String nombre = dataGridView1.Rows[i].Cells[2].Value.ToString();
-
-
-                    int b1tmp, b2tmp, b3tmp, b4tmp, b5tmp;
-                    int b1, b2, b3, b4, b5;
-
-                    b1tmp = int.Parse(bq1);
-                    b2tmp = int.Parse(bq2);
-                    b3tmp = int.Parse(bq3);
-                    b4tmp = int.Parse(bq4);
-                    b5tmp = int.Parse(bq5);
-
-                    if (b1tmp > 100)
-                    {
-                        b1 = 100;
-                    }
-                    else
-                    {
-                        b1 = b1tmp;
-                    }
-
-                    if (b2tmp > 100)
-                    {
-                        b2 = 100;
-                    }
-                    else
-                    {
-                        b2 = b2tmp;
-                    }
-
-                    if (b3tmp > 100)
-                    {
-                        b3 = 100;
-                    }
-                    else
-                    {
-                        b3 = b3tmp;
-                    }
-
-                    if (b4tmp > 100)
-                    {
-                        b4 = 100;
-                    }
-                    else
-                    {
-                        b4 = b4tmp;
-                    }
-
-                    if (b5tmp > 100)
-                    {
-                        b5 = 100;
-                    }
-                    else
-                    {
-                        b5 = b5tmp;
-                    }
-
-                    MySqlCommand comando1 = new MySqlCommand("UPDATE calificaciones set bloque1 = @bloque1, bloque2 = @bloque2, bloque3 = @bloque3, bloque4 = @bloque4, bloque5 = @bloque5, " +
-                        "observaciones = @comentarios WHERE id_materia = @id_materia AND no_control = @no_control;");
-                    comando1.Connection = Conexion;
-
-                    MySqlParameter parametro0 = new MySqlParameter();
-                    parametro0.ParameterName = "@id_materia";
-                    parametro0.Value = id_materia;
-                    comando1.Parameters.Add(parametro0);
-
-                    MySqlParameter parametro1 = new MySqlParameter();
-                    parametro1.ParameterName = "@no_control";
-                    parametro1.Value = no_control;
-                    comando1.Parameters.Add(parametro1);
-
-                    MySqlParameter parametro2 = new MySqlParameter();
-                    parametro2.ParameterName = "@bloque1";
-                    parametro2.Value = b1;
-                    comando1.Parameters.Add(parametro2);
-
-                    MySqlParameter parametro3 = new MySqlParameter();
-                    parametro3.ParameterName = "@bloque2";
-                    parametro3.Value = b2;
-                    comando1.Parameters.Add(parametro3);
-
-                    MySqlParameter parametro4 = new MySqlParameter();
-                    parametro4.ParameterName = "@bloque3";
-                    parametro4.Value = b3;
-                    comando1.Parameters.Add(parametro4);
-
-                    MySqlParameter parametro5 = new MySqlParameter();
-                    parametro5.ParameterName = "@bloque4";
-                    parametro5.Value = b4;
-                    comando1.Parameters.Add(parametro5);
-
-                    MySqlParameter parametro6 = new MySqlParameter();
-                    parametro6.ParameterName = "@bloque5";
-                    parametro6.Value = b5;
-                    comando1.Parameters.Add(parametro6);
-
-                    MySqlParameter parametro7 = new MySqlParameter();
-                    parametro7.ParameterName = "@comentarios";
-                    parametro7.Value = comentarios;
-                    comando1.Parameters.Add(parametro7);
-
-                    try
-                    {
-                        Conexion.Open();
-                        comando1.ExecuteNonQuery();
-                        bandera = true;
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Uno o mas alumnos que intentas calificar ya tienen registrada su calificación, procura consultar antes la lista de calificaciones registradas");
-                        bandera = false;
-                    }
-                    Conexion.Close();
-                }
-                if (bandera == true)
-                {
-                    MessageBox.Show("Se registraron las calificaciones con éxito", "Modificar asistencia");
-                }
-                else
-                {
-
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("Ha ocurrido un error" + err);
-            }
-        }
-        private void Registro_Seleccion() 
-        {
             DialogResult eliminar = MessageBox.Show("Deseas modificar las calificaciones de los alumnos seleccionados?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (eliminar == DialogResult.Cancel)
@@ -360,16 +206,171 @@ namespace Proyecto_Calificaciones
                 for (int i = dataGridView1.Rows.Count - 1; i >= 0; i--)
                 {
                     bool modifica = Convert.ToBoolean(dataGridView1.Rows[i].Cells[0].Value);
-                    string id = dataGridView1.Rows[i].Cells[1].Value.ToString();
 
                     if (modifica == true)
                     {
-                        RegistrarCalificaciones();
+                        
+                        try
+                        {
+                            String no_control, comentarios;
+                            String bq1, bq2, bq3, bq4, bq5;
+
+                            AsignacionID();
+                            AsignarIDMateria();
+
+                            bq1 = dataGridView1.Rows[i].Cells[3].Value.ToString();
+                            bq2 = dataGridView1.Rows[i].Cells[4].Value.ToString();
+                            bq3 = dataGridView1.Rows[i].Cells[5].Value.ToString();
+                            bq4 = dataGridView1.Rows[i].Cells[6].Value.ToString();
+                            bq5 = dataGridView1.Rows[i].Cells[7].Value.ToString();
+                            try
+                            {
+                                comentarios = dataGridView1.Rows[i].Cells[8].Value.ToString();
+                            }
+                            catch
+                            {
+                                comentarios = "Ninguno";
+                            }
+                            no_control = dataGridView1.Rows[i].Cells[1].Value.ToString();
+                            String nombre = dataGridView1.Rows[i].Cells[2].Value.ToString();
+
+
+                            int b1tmp, b2tmp, b3tmp, b4tmp, b5tmp;
+                            int b1, b2, b3, b4, b5;
+
+                            b1tmp = int.Parse(bq1);
+                            b2tmp = int.Parse(bq2);
+                            b3tmp = int.Parse(bq3);
+                            b4tmp = int.Parse(bq4);
+                            b5tmp = int.Parse(bq5);
+
+                            if (b1tmp > 100)
+                            {
+                                b1 = 100;
+                            }
+                            else
+                            {
+                                b1 = b1tmp;
+                            }
+
+                            if (b2tmp > 100)
+                            {
+                                b2 = 100;
+                            }
+                            else
+                            {
+                                b2 = b2tmp;
+                            }
+
+                            if (b3tmp > 100)
+                            {
+                                b3 = 100;
+                            }
+                            else
+                            {
+                                b3 = b3tmp;
+                            }
+
+                            if (b4tmp > 100)
+                            {
+                                b4 = 100;
+                            }
+                            else
+                            {
+                                b4 = b4tmp;
+                            }
+
+                            if (b5tmp > 100)
+                            {
+                                b5 = 100;
+                            }
+                            else
+                            {
+                                b5 = b5tmp;
+                            }
+
+                            MySqlCommand comando1 = new MySqlCommand("UPDATE calificaciones set bloque1 = @bloque1, bloque2 = @bloque2, bloque3 = @bloque3, bloque4 = @bloque4, bloque5 = @bloque5, " +
+                                "observaciones = @comentarios WHERE id_materia = @id_materia AND no_control = @no_control;");
+                            comando1.Connection = Conexion;
+
+                            MySqlParameter parametro0 = new MySqlParameter();
+                            parametro0.ParameterName = "@id_materia";
+                            parametro0.Value = id_materia;
+                            comando1.Parameters.Add(parametro0);
+
+                            MySqlParameter parametro1 = new MySqlParameter();
+                            parametro1.ParameterName = "@no_control";
+                            parametro1.Value = no_control;
+                            comando1.Parameters.Add(parametro1);
+
+                            MySqlParameter parametro2 = new MySqlParameter();
+                            parametro2.ParameterName = "@bloque1";
+                            parametro2.Value = b1;
+                            comando1.Parameters.Add(parametro2);
+
+                            MySqlParameter parametro3 = new MySqlParameter();
+                            parametro3.ParameterName = "@bloque2";
+                            parametro3.Value = b2;
+                            comando1.Parameters.Add(parametro3);
+
+                            MySqlParameter parametro4 = new MySqlParameter();
+                            parametro4.ParameterName = "@bloque3";
+                            parametro4.Value = b3;
+                            comando1.Parameters.Add(parametro4);
+
+                            MySqlParameter parametro5 = new MySqlParameter();
+                            parametro5.ParameterName = "@bloque4";
+                            parametro5.Value = b4;
+                            comando1.Parameters.Add(parametro5);
+
+                            MySqlParameter parametro6 = new MySqlParameter();
+                            parametro6.ParameterName = "@bloque5";
+                            parametro6.Value = b5;
+                            comando1.Parameters.Add(parametro6);
+
+                            MySqlParameter parametro7 = new MySqlParameter();
+                            parametro7.ParameterName = "@comentarios";
+                            parametro7.Value = comentarios;
+                            comando1.Parameters.Add(parametro7);
+
+                            try
+                            {
+                                Conexion.Open();
+                                comando1.ExecuteNonQuery();
+                                bandera = true;
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Uno o mas alumnos que intentas calificar ya tienen registrada su calificación, procura consultar antes la lista de calificaciones registradas");
+                                bandera = false;
+                            }
+                            Conexion.Close();
+                            
+                        }
+                        catch (Exception err)
+                        {
+                            MessageBox.Show("Ha ocurrido un error" + err);
+                        }
+                    }
+                    else
+                    {
+
                     }
                 }
+
+                if (bandera == true)
+                {
+                    MessageBox.Show("Se registraron las calificaciones con éxito", "Modificar asistencia");
+                }
+                else
+                {
+
+                }
+
             }
+
         }
-        private void SeleccionarTodos() 
+        private void SeleccionarTodos()
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -384,11 +385,11 @@ namespace Proyecto_Calificaciones
             {
                 MessageBox.Show("Antes de buscar asegúrate de seleccionar un valor para grado, uno para grupo y elegir una matería");
             }
-            else 
+            else
             {
                 MostrarTabla();
             }
-            
+
         }
 
         private void comboBox5_DropDown(object sender, EventArgs e)
@@ -403,13 +404,13 @@ namespace Proyecto_Calificaciones
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Registro_Seleccion();
+            RegistrarCalificaciones();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             SeleccionarTodos();
-            Registro_Seleccion();
+            RegistrarCalificaciones();
         }
 
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
