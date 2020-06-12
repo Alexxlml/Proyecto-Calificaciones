@@ -39,6 +39,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewImageColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.btn_Eliminar = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -54,7 +55,6 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -89,9 +89,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(271, 31);
+            this.label1.Size = new System.Drawing.Size(277, 31);
             this.label1.TabIndex = 16;
-            this.label1.Text = "Registrar Asistencias";
+            this.label1.Text = "Consultar Asistencias";
             // 
             // dataGridView1
             // 
@@ -164,13 +164,24 @@
             this.Column6.DataPropertyName = "asistencia_justificada";
             this.Column6.HeaderText = "Falta justificada";
             this.Column6.Name = "Column6";
-            this.Column6.Width = 105;
+            this.Column6.Width = 96;
             // 
             // Column7
             // 
             this.Column7.DataPropertyName = "fecha";
             this.Column7.HeaderText = "Fecha y hora";
             this.Column7.Name = "Column7";
+            // 
+            // Column8
+            // 
+            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column8.DataPropertyName = "Foto";
+            this.Column8.HeaderText = "Fotografía";
+            this.Column8.Image = global::Proyecto_Calificaciones.Properties.Resources.unnamed;
+            this.Column8.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.Column8.Name = "Column8";
+            this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // button1
             // 
@@ -324,17 +335,6 @@
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
             this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Column8
-            // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column8.DataPropertyName = "Foto";
-            this.Column8.HeaderText = "Fotografía";
-            this.Column8.Image = global::Proyecto_Calificaciones.Properties.Resources.unnamed;
-            this.Column8.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.Column8.Name = "Column8";
-            this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Consulta_Asistencias
             // 

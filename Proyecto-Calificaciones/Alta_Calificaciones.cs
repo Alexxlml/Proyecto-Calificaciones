@@ -297,8 +297,15 @@ namespace Proyecto_Calificaciones
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AsignacionID();
-            MostrarTabla();
+            if (comboBox1.Text == "" | comboBox2.Text == "" | comboBox5.Text == "")
+            {
+                MessageBox.Show("Antes de buscar asegúrate de seleccionar un valor para grado, uno para grupo y elegir una matería");
+            }
+            else
+            {
+                AsignacionID();
+                MostrarTabla();
+            }
 
         }
 

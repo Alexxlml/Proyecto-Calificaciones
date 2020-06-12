@@ -193,8 +193,16 @@ namespace Proyecto_Calificaciones
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AsignacionID();
-            MostrarTabla();
+            if (comboBox1.Text == "" | comboBox2.Text == "" | comboBox5.Text == "")
+            {
+                MessageBox.Show("Antes de buscar asegúrate de seleccionar un valor para grado, uno para grupo y elegir una matería");
+            }
+            else 
+            {
+                AsignacionID();
+                MostrarTabla();
+            }
+            
         }
 
         private void comboBox5_DropDown(object sender, EventArgs e)
@@ -205,6 +213,16 @@ namespace Proyecto_Calificaciones
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
