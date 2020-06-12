@@ -101,7 +101,9 @@ namespace Proyecto_Calificaciones
 
         private void consultarKardexToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            Kardex kardex = new Kardex();
+            kardex.MdiParent = this;
+            kardex.Show();
         }
     }
 }
