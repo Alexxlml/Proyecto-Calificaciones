@@ -181,6 +181,9 @@
     <EmbeddedResource Include="Consulta_G_alumno.resx">
       <DependentUpon>Consulta_G_alumno.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Consulta_G_Calificaciones.resx">
+      <DependentUpon>Consulta_G_Calificaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta_G_Usuario.resx">
       <DependentUpon>Consulta_G_Usuario.cs</DependentUpon>
     </EmbeddedResource>

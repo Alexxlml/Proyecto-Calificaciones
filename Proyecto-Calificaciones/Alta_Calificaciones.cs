@@ -138,7 +138,7 @@ namespace Proyecto_Calificaciones
                 asignacion = 19;
             }
         }
-        private void AsignarIDMateria() 
+        private void AsignarIDMateria()
         {
             String nombre_materia_temp = comboBox5.Text;
 
@@ -190,6 +190,7 @@ namespace Proyecto_Calificaciones
             bool bandera = false;
             try
             {
+
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
                     String no_control, comentarios;
@@ -203,8 +204,17 @@ namespace Proyecto_Calificaciones
                     bq3 = dataGridView1.Rows[i].Cells[2].Value.ToString();
                     bq4 = dataGridView1.Rows[i].Cells[3].Value.ToString();
                     bq5 = dataGridView1.Rows[i].Cells[4].Value.ToString();
-                    comentarios = dataGridView1.Rows[i].Cells[5].Value.ToString();
+                    try
+                    {
+                        comentarios = dataGridView1.Rows[i].Cells[5].Value.ToString();
+                    }
+                    catch 
+                    {
+                        comentarios = "Ninguno";
+                    }
                     no_control = dataGridView1.Rows[i].Cells[6].Value.ToString();
+                    String nombre = dataGridView1.Rows[i].Cells[7].Value.ToString();
+
 
                     int b1, b2, b3, b4, b5;
 
@@ -270,15 +280,16 @@ namespace Proyecto_Calificaciones
                     }
                     Conexion.Close();
                 }
-                if (bandera == true) {
+                if (bandera == true)
+                {
                     MessageBox.Show("Se registraron las calificaciones con éxito", "Modificar asistencia");
                 }
-                else 
-                { 
-                
+                else
+                {
+
                 }
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 MessageBox.Show("Ha ocurrido un error" + err);
             }
@@ -293,7 +304,17 @@ namespace Proyecto_Calificaciones
 
         private void button1_Click(object sender, EventArgs e)
         {
-            RegistrarCalificaciones();
+            DialogResult modificar = MessageBox.Show("¿Estás seguro de que has seleccionado todas las calificaciones? \n" +
+                "Si te equivocas en alguna, podrás corregirla después", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (modificar == DialogResult.Cancel)
+            {
+
+            }
+            else
+            {
+                RegistrarCalificaciones();
+            }
         }
     }
 }
