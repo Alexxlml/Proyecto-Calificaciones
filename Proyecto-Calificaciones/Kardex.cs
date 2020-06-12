@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using MySql.Data.MySqlClient;
 
 namespace Proyecto_Calificaciones
@@ -49,7 +52,10 @@ namespace Proyecto_Calificaciones
             lbl_grupo.Text = grupo;
             MostrarTabla();
 
-
+            if (lbl_no_control.Text != "") 
+            {
+                button1.Enabled = true;
+            }
 
         }
 
@@ -135,6 +141,11 @@ namespace Proyecto_Calificaciones
                 validacion.SoloLetras(e);
                 textBox13.MaxLength = 50;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ImprimirKardex();
         }
 
         private void QueryBusqueda()
@@ -251,7 +262,8 @@ namespace Proyecto_Calificaciones
             String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
             Conexion.ConnectionString = CadenaConexion;
 
-            MySqlCommand comandoconsulta = new MySqlCommand("select m.nombre, c.bloque1, c.bloque2, c.bloque3, c.bloque4, c.bloque5 " +
+            MySqlCommand comandoconsulta = new MySqlCommand("select m.nombre, c.bloque1, c.bloque2, c.bloque3, c.bloque4, c.bloque5, " +
+                "(bloque1 + bloque2 + bloque3 + bloque4 + bloque5)/5 as promedio " +
                 "from calificaciones c " +
                 "inner join materias m " +
                 "on c.id_materia = m.id_materia " +
@@ -270,6 +282,100 @@ namespace Proyecto_Calificaciones
             dataGridView1.DataSource = Set.Tables[0];
 
             con.Dispose();
+        }
+        
+        private void ImprimirKardex()
+        {
+            double promedio_sin = 0;
+            double promedio = 0;
+            int total_materias = dataGridView1.Rows.Count;
+            DateTime fecha = DateTime.Now;
+
+            for (int i = dataGridView1.Rows.Count - 1; i >= 0; i--)
+            {
+                double suma = 0;
+                suma = double.Parse(dataGridView1.Rows[i].Cells[6].Value.ToString());
+                promedio_sin = promedio_sin + suma;
+            }
+
+            promedio = promedio_sin / total_materias;
+            double dos_digitos = (Math.Truncate(promedio * 100) / 100);
+
+            String promedio_texto = dos_digitos.ToString();
+            MessageBox.Show(promedio_texto);
+
+            Document documento = new Document();
+            PdfWriter wri = PdfWriter.GetInstance(documento, new FileStream("C:/NET/Kardex(" + no_control + ").pdf", FileMode.Create));
+            documento.Open();
+
+            // Creamos la imagen y le ajustamos el tamaño
+            //iTextSharp.text.Image imagen = iTextSharp.text.Image.GetInstance("C:/NET/");
+            //imagen.BorderWidth = 0;
+            //imagen.Alignment = Element.ALIGN_CENTER;
+            //float percentage = 0.0f;
+            //percentage = 150 / imagen.Width;
+            //imagen.ScalePercent(percentage * 100);
+
+            // Insertamos la imagen en el documento
+            //documento.Add(imagen);
+
+
+
+            //Encabezado
+            Paragraph title = new Paragraph(string.Format("Kardex"), new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 20, iTextSharp.text.Font.NORMAL));
+            title.Alignment = Element.ALIGN_CENTER;
+            documento.Add(title);
+            documento.Add(new Paragraph("\n"));
+
+            //Fecha
+            Paragraph Fecha_kardex = new Paragraph(string.Format("Fecha: " + fecha), new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.NORMAL));
+            Fecha_kardex.Alignment = Element.ALIGN_RIGHT;
+            documento.Add(Fecha_kardex);
+            documento.Add(new Paragraph("\n"));
+
+            //Fecha
+            Paragraph nombre_kardex = new Paragraph(string.Format("Nombre: " + nombre + " " + apellidos), new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.NORMAL));
+            nombre_kardex.Alignment = Element.ALIGN_RIGHT;
+            documento.Add(nombre_kardex);
+            documento.Add(new Paragraph("\n"));
+
+            //Fecha
+            Paragraph gradogrupo_kardex = new Paragraph(string.Format("Grado: " + grado + " Grupo: " + grupo), new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.NORMAL));
+            gradogrupo_kardex.Alignment = Element.ALIGN_RIGHT;
+            documento.Add(gradogrupo_kardex);
+            documento.Add(new Paragraph("\n"));
+
+            //Fecha
+            Paragraph p_general = new Paragraph(string.Format("Promedio general: " + promedio_texto), new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.NORMAL));
+            p_general.Alignment = Element.ALIGN_RIGHT;
+            documento.Add(p_general);
+            documento.Add(new Paragraph("\n"));
+
+            //Creación de la tabla
+            PdfPTable pdfTable = new PdfPTable(7);
+            pdfTable.WidthPercentage = 100;
+            pdfTable.SetWidths(new float[] { 40, 10, 10, 10, 10, 10, 10 });
+
+            pdfTable.AddCell(new Paragraph("Materia", FontFactory.GetFont("arial", 10, BaseColor.RED)));
+            pdfTable.AddCell(new Paragraph("Bloque 1", FontFactory.GetFont("arial", 10, BaseColor.RED)));
+            pdfTable.AddCell(new Paragraph("Bloque 2", FontFactory.GetFont("arial", 10, BaseColor.RED)));
+            pdfTable.AddCell(new Paragraph("Bloque 3", FontFactory.GetFont("arial", 10, BaseColor.RED)));
+            pdfTable.AddCell(new Paragraph("Bloque 4", FontFactory.GetFont("arial", 10, BaseColor.RED)));
+            pdfTable.AddCell(new Paragraph("Bloque 5", FontFactory.GetFont("arial", 10, BaseColor.RED)));
+            pdfTable.AddCell(new Paragraph("Promedio", FontFactory.GetFont("arial", 10, BaseColor.RED)));
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                foreach (DataGridViewCell celli in row.Cells)
+                {
+                    pdfTable.AddCell(celli.Value.ToString());
+                }
+            }
+            documento.Add(pdfTable);
+            documento.Add(new Paragraph("\n"));
+
+            documento.Close();
+            MessageBox.Show("El Kardex ha sido creado con éxito");
         }
     }
 }
