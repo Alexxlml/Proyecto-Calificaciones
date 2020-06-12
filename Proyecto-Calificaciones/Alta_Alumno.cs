@@ -373,6 +373,26 @@ namespace Proyecto_Calificaciones
             {
                 ForMaterias(1, 4, num_control, b1, b2, b3, b4, b5, observaciones);
             }
+            if (grado_combo == 2)
+            {
+                ForMaterias(5, 8, num_control, b1, b2, b3, b4, b5, observaciones);
+            }
+            if (grado_combo == 3)
+            {
+                ForMaterias(9, 14, num_control, b1, b2, b3, b4, b5, observaciones);
+            }
+            if (grado_combo == 4)
+            {
+                ForMaterias(15, 21, num_control, b1, b2, b3, b4, b5, observaciones);
+            }
+            if (grado_combo == 5)
+            {
+                ForMaterias(22, 28, num_control, b1, b2, b3, b4, b5, observaciones);
+            }
+            if (grado_combo == 6)
+            {
+                ForMaterias(29, 35, num_control, b1, b2, b3, b4, b5, observaciones);
+            }
 
         }
 
