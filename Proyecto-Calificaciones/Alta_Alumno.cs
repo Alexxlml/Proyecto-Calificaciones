@@ -352,13 +352,52 @@ namespace Proyecto_Calificaciones
                 Conexion.Open();
                 comando1.ExecuteNonQuery();
                 MessageBox.Show("Datos insertados con éxito", "Registro de Alumnos");
-                Limpiar();
+                Conexion.Close();
+                RegistrarAlumnoMaterias();
+                //Limpiar();
             }
             catch (Exception err)
             {
                 MessageBox.Show("Este Alumno ya está registrado" + err);
             }
-            Conexion.Close();
+        }
+
+        private void RegistrarAlumnoMaterias() 
+        {
+            string num_control = textBox1.Text;
+            int grado_combo = int.Parse(comboBox1.Text);
+            int b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0;
+            string observaciones = "";
+
+            if (grado_combo == 1)
+            {
+                ForMaterias(1, 4, num_control, b1, b2, b3, b4, b5, observaciones);
+            }
+
+        }
+
+        private void ForMaterias(int v_i, int v_f, string num_control, int b1, int b2, int b3, int b4, int b5, string observaciones) 
+        {
+            for (int i = v_i; i <= v_f; i++)
+            {
+                int id_materia = i;
+
+                MySqlCommand comando1 = new MySqlCommand("INSERT INTO calificaciones values ('" + id_materia + "','" + num_control + "','" + b1 + "','" + b2 + "','" + b3 + "','" + b4 + "','" + b5 + "','" + observaciones + "');");
+                comando1.Connection = Conexion;
+
+                try
+                {
+                    Conexion.Open();
+                    comando1.ExecuteNonQuery();
+                    Limpiar();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("" + err);
+                }
+                Conexion.Close();
+
+            }
         }
     }
 }

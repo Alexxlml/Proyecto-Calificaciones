@@ -162,6 +162,7 @@ namespace Proyecto_Calificaciones
         }
         private void MostrarTabla()
         {
+            AsignacionID();
             AsignarIDMateria();
 
             String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
@@ -173,7 +174,7 @@ namespace Proyecto_Calificaciones
                 "on c.id_materia = m.id_materia " +
                 "inner join alumnos al " +
                 "on c.no_control = al.no_control " +
-                "where al.id_asignacion = "+ asignacion +" and c.id_materia = " + id_materia + " " +
+                "where al.id_asignacion = " + asignacion + " and c.id_materia = " + id_materia + " " +
                 "ORDER by al.apellidos asc;");
 
             comandoconsulta.Connection = Conexion;
@@ -199,7 +200,6 @@ namespace Proyecto_Calificaciones
             }
             else 
             {
-                AsignacionID();
                 MostrarTabla();
             }
             
@@ -212,7 +212,7 @@ namespace Proyecto_Calificaciones
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            e.Cancel = true;
+            //e.Cancel = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -222,6 +222,35 @@ namespace Proyecto_Calificaciones
 
         private void button3_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            DataGridViewTextBoxEditingControl dText = (DataGridViewTextBoxEditingControl)e.Control;
+
+            dText.KeyPress -= new KeyPressEventHandler(dataGridView1_KeyPress);
+            dText.KeyPress += new KeyPressEventHandler(dataGridView1_KeyPress);
 
         }
     }

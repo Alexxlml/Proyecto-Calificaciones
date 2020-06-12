@@ -38,16 +38,16 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.Column9 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +72,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(1240, 493);
             this.dataGridView1.TabIndex = 109;
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
+            this.dataGridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView1_KeyPress);
             // 
             // button1
             // 
@@ -175,6 +176,16 @@
             this.label1.TabIndex = 100;
             this.label1.Text = "Consultar Calificaciones";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1003, 599);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(137, 30);
+            this.button3.TabIndex = 110;
+            this.button3.Text = "Modificar todos";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Column9
             // 
             this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -199,108 +210,10 @@
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Column3.DataPropertyName = "bloque1";
             this.Column3.HeaderText = "Bloque 1";
-            this.Column3.Items.AddRange(new object[] {
-            "100",
-            "99",
-            "98",
-            "97",
-            "96",
-            "95",
-            "94",
-            "93",
-            "92",
-            "91",
-            "90",
-            "89",
-            "88",
-            "87",
-            "86",
-            "85",
-            "84",
-            "83",
-            "82",
-            "81",
-            "80",
-            "79",
-            "78",
-            "77",
-            "76",
-            "75",
-            "74",
-            "73",
-            "72",
-            "71",
-            "70",
-            "69",
-            "68",
-            "67",
-            "66",
-            "65",
-            "64",
-            "63",
-            "62",
-            "61",
-            "60",
-            "59",
-            "58",
-            "57",
-            "56",
-            "55",
-            "54",
-            "53",
-            "52",
-            "51",
-            "50",
-            "49",
-            "48",
-            "47",
-            "46",
-            "45",
-            "44",
-            "43",
-            "42",
-            "41",
-            "40",
-            "39",
-            "38",
-            "37",
-            "36",
-            "35",
-            "34",
-            "33",
-            "32",
-            "31",
-            "30",
-            "29",
-            "28",
-            "27",
-            "26",
-            "25",
-            "24",
-            "23",
-            "21",
-            "20",
-            "19",
-            "18",
-            "17",
-            "16",
-            "15",
-            "14",
-            "13",
-            "12",
-            "11",
-            "10",
-            "9",
-            "8",
-            "7",
-            "6",
-            "5",
-            "4",
-            "3",
-            "2",
-            "1",
-            "0"});
+            this.Column3.MaxInputLength = 3;
             this.Column3.Name = "Column3";
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column3.Width = 55;
             // 
             // Column4
@@ -308,108 +221,10 @@
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Column4.DataPropertyName = "bloque2";
             this.Column4.HeaderText = "Bloque 2";
-            this.Column4.Items.AddRange(new object[] {
-            "100",
-            "99",
-            "98",
-            "97",
-            "96",
-            "95",
-            "94",
-            "93",
-            "92",
-            "91",
-            "90",
-            "89",
-            "88",
-            "87",
-            "86",
-            "85",
-            "84",
-            "83",
-            "82",
-            "81",
-            "80",
-            "79",
-            "78",
-            "77",
-            "76",
-            "75",
-            "74",
-            "73",
-            "72",
-            "71",
-            "70",
-            "69",
-            "68",
-            "67",
-            "66",
-            "65",
-            "64",
-            "63",
-            "62",
-            "61",
-            "60",
-            "59",
-            "58",
-            "57",
-            "56",
-            "55",
-            "54",
-            "53",
-            "52",
-            "51",
-            "50",
-            "49",
-            "48",
-            "47",
-            "46",
-            "45",
-            "44",
-            "43",
-            "42",
-            "41",
-            "40",
-            "39",
-            "38",
-            "37",
-            "36",
-            "35",
-            "34",
-            "33",
-            "32",
-            "31",
-            "30",
-            "29",
-            "28",
-            "27",
-            "26",
-            "25",
-            "24",
-            "23",
-            "21",
-            "20",
-            "19",
-            "18",
-            "17",
-            "16",
-            "15",
-            "14",
-            "13",
-            "12",
-            "11",
-            "10",
-            "9",
-            "8",
-            "7",
-            "6",
-            "5",
-            "4",
-            "3",
-            "2",
-            "1",
-            "0"});
+            this.Column4.MaxInputLength = 3;
             this.Column4.Name = "Column4";
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column4.Width = 55;
             // 
             // Column5
@@ -417,108 +232,10 @@
             this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Column5.DataPropertyName = "bloque3";
             this.Column5.HeaderText = "Bloque 3";
-            this.Column5.Items.AddRange(new object[] {
-            "100",
-            "99",
-            "98",
-            "97",
-            "96",
-            "95",
-            "94",
-            "93",
-            "92",
-            "91",
-            "90",
-            "89",
-            "88",
-            "87",
-            "86",
-            "85",
-            "84",
-            "83",
-            "82",
-            "81",
-            "80",
-            "79",
-            "78",
-            "77",
-            "76",
-            "75",
-            "74",
-            "73",
-            "72",
-            "71",
-            "70",
-            "69",
-            "68",
-            "67",
-            "66",
-            "65",
-            "64",
-            "63",
-            "62",
-            "61",
-            "60",
-            "59",
-            "58",
-            "57",
-            "56",
-            "55",
-            "54",
-            "53",
-            "52",
-            "51",
-            "50",
-            "49",
-            "48",
-            "47",
-            "46",
-            "45",
-            "44",
-            "43",
-            "42",
-            "41",
-            "40",
-            "39",
-            "38",
-            "37",
-            "36",
-            "35",
-            "34",
-            "33",
-            "32",
-            "31",
-            "30",
-            "29",
-            "28",
-            "27",
-            "26",
-            "25",
-            "24",
-            "23",
-            "21",
-            "20",
-            "19",
-            "18",
-            "17",
-            "16",
-            "15",
-            "14",
-            "13",
-            "12",
-            "11",
-            "10",
-            "9",
-            "8",
-            "7",
-            "6",
-            "5",
-            "4",
-            "3",
-            "2",
-            "1",
-            "0"});
+            this.Column5.MaxInputLength = 3;
             this.Column5.Name = "Column5";
+            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column5.Width = 55;
             // 
             // Column6
@@ -526,108 +243,10 @@
             this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Column6.DataPropertyName = "bloque4";
             this.Column6.HeaderText = "Bloque 4";
-            this.Column6.Items.AddRange(new object[] {
-            "100",
-            "99",
-            "98",
-            "97",
-            "96",
-            "95",
-            "94",
-            "93",
-            "92",
-            "91",
-            "90",
-            "89",
-            "88",
-            "87",
-            "86",
-            "85",
-            "84",
-            "83",
-            "82",
-            "81",
-            "80",
-            "79",
-            "78",
-            "77",
-            "76",
-            "75",
-            "74",
-            "73",
-            "72",
-            "71",
-            "70",
-            "69",
-            "68",
-            "67",
-            "66",
-            "65",
-            "64",
-            "63",
-            "62",
-            "61",
-            "60",
-            "59",
-            "58",
-            "57",
-            "56",
-            "55",
-            "54",
-            "53",
-            "52",
-            "51",
-            "50",
-            "49",
-            "48",
-            "47",
-            "46",
-            "45",
-            "44",
-            "43",
-            "42",
-            "41",
-            "40",
-            "39",
-            "38",
-            "37",
-            "36",
-            "35",
-            "34",
-            "33",
-            "32",
-            "31",
-            "30",
-            "29",
-            "28",
-            "27",
-            "26",
-            "25",
-            "24",
-            "23",
-            "21",
-            "20",
-            "19",
-            "18",
-            "17",
-            "16",
-            "15",
-            "14",
-            "13",
-            "12",
-            "11",
-            "10",
-            "9",
-            "8",
-            "7",
-            "6",
-            "5",
-            "4",
-            "3",
-            "2",
-            "1",
-            "0"});
+            this.Column6.MaxInputLength = 3;
             this.Column6.Name = "Column6";
+            this.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column6.Width = 55;
             // 
             // Column7
@@ -635,108 +254,10 @@
             this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Column7.DataPropertyName = "bloque5";
             this.Column7.HeaderText = "Bloque 5";
-            this.Column7.Items.AddRange(new object[] {
-            "100",
-            "99",
-            "98",
-            "97",
-            "96",
-            "95",
-            "94",
-            "93",
-            "92",
-            "91",
-            "90",
-            "89",
-            "88",
-            "87",
-            "86",
-            "85",
-            "84",
-            "83",
-            "82",
-            "81",
-            "80",
-            "79",
-            "78",
-            "77",
-            "76",
-            "75",
-            "74",
-            "73",
-            "72",
-            "71",
-            "70",
-            "69",
-            "68",
-            "67",
-            "66",
-            "65",
-            "64",
-            "63",
-            "62",
-            "61",
-            "60",
-            "59",
-            "58",
-            "57",
-            "56",
-            "55",
-            "54",
-            "53",
-            "52",
-            "51",
-            "50",
-            "49",
-            "48",
-            "47",
-            "46",
-            "45",
-            "44",
-            "43",
-            "42",
-            "41",
-            "40",
-            "39",
-            "38",
-            "37",
-            "36",
-            "35",
-            "34",
-            "33",
-            "32",
-            "31",
-            "30",
-            "29",
-            "28",
-            "27",
-            "26",
-            "25",
-            "24",
-            "23",
-            "21",
-            "20",
-            "19",
-            "18",
-            "17",
-            "16",
-            "15",
-            "14",
-            "13",
-            "12",
-            "11",
-            "10",
-            "9",
-            "8",
-            "7",
-            "6",
-            "5",
-            "4",
-            "3",
-            "2",
-            "1",
-            "0"});
+            this.Column7.MaxInputLength = 3;
             this.Column7.Name = "Column7";
+            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column7.Width = 55;
             // 
             // Column8
@@ -744,16 +265,6 @@
             this.Column8.DataPropertyName = "observaciones";
             this.Column8.HeaderText = "Comentarios";
             this.Column8.Name = "Column8";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(1003, 599);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(137, 30);
-            this.button3.TabIndex = 110;
-            this.button3.Text = "Modificar todos";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Consulta_G_Calificaciones
             // 
@@ -792,15 +303,15 @@
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.Button button3;
     }
 }
