@@ -167,10 +167,21 @@ namespace Proyecto_Calificaciones
         }
         private void MostrarTabla()
         {
+            AsignacionID();
+            AsignarIDMateria();
+
             String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
             Conexion.ConnectionString = CadenaConexion;
 
-            MySqlCommand comandoconsulta = new MySqlCommand("select no_control, concat(apellidos, ' ' ,nombre) as nombre from alumnos where id_asignacion = " + asignacion + " order by concat(apellidos, ' ' ,nombre) desc;");
+            MySqlCommand comandoconsulta = new MySqlCommand("select al.no_control, CONCAT(al.apellidos,' ', al.nombre) as nombre, c.bloque1, c.bloque2, c.bloque3, c.bloque4, c.bloque5, c.observaciones " +
+                "from calificaciones c " +
+                "inner join materias m " +
+                "on c.id_materia = m.id_materia " +
+                "inner join alumnos al " +
+                "on c.no_control = al.no_control " +
+                "where al.id_asignacion = " + asignacion + " and c.id_materia = " + id_materia + " " +
+                "ORDER by al.apellidos asc;");
+
             comandoconsulta.Connection = Conexion;
             MySqlDataAdapter con = new MySqlDataAdapter(comandoconsulta);
             DataSet Set = new DataSet();
@@ -199,32 +210,79 @@ namespace Proyecto_Calificaciones
                     AsignacionID();
                     AsignarIDMateria();
 
-                    bq1 = dataGridView1.Rows[i].Cells[0].Value.ToString();
-                    bq2 = dataGridView1.Rows[i].Cells[1].Value.ToString();
-                    bq3 = dataGridView1.Rows[i].Cells[2].Value.ToString();
-                    bq4 = dataGridView1.Rows[i].Cells[3].Value.ToString();
-                    bq5 = dataGridView1.Rows[i].Cells[4].Value.ToString();
+                    bq1 = dataGridView1.Rows[i].Cells[2].Value.ToString();
+                    bq2 = dataGridView1.Rows[i].Cells[3].Value.ToString();
+                    bq3 = dataGridView1.Rows[i].Cells[4].Value.ToString();
+                    bq4 = dataGridView1.Rows[i].Cells[5].Value.ToString();
+                    bq5 = dataGridView1.Rows[i].Cells[6].Value.ToString();
                     try
                     {
-                        comentarios = dataGridView1.Rows[i].Cells[5].Value.ToString();
+                        comentarios = dataGridView1.Rows[i].Cells[7].Value.ToString();
                     }
                     catch 
                     {
                         comentarios = "Ninguno";
                     }
-                    no_control = dataGridView1.Rows[i].Cells[6].Value.ToString();
-                    String nombre = dataGridView1.Rows[i].Cells[7].Value.ToString();
+                    no_control = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                    String nombre = dataGridView1.Rows[i].Cells[1].Value.ToString();
 
-
+                    int b1tmp, b2tmp, b3tmp, b4tmp, b5tmp;
                     int b1, b2, b3, b4, b5;
 
-                    b1 = int.Parse(bq1);
-                    b2 = int.Parse(bq2);
-                    b3 = int.Parse(bq3);
-                    b4 = int.Parse(bq4);
-                    b5 = int.Parse(bq5);
+                    b1tmp = int.Parse(bq1);
+                    b2tmp = int.Parse(bq2);
+                    b3tmp = int.Parse(bq3);
+                    b4tmp = int.Parse(bq4);
+                    b5tmp = int.Parse(bq5);
 
-                    MySqlCommand comando1 = new MySqlCommand("INSERT INTO calificaciones values (@id_materia, @no_control, @bloque1, @bloque2, @bloque3, @bloque4, @bloque5, @comentarios);");
+                    if (b1tmp > 100)
+                    {
+                        b1 = 100;
+                    }
+                    else 
+                    {
+                        b1 = b1tmp;
+                    }
+
+                    if (b2tmp > 100)
+                    {
+                        b2 = 100;
+                    }
+                    else
+                    {
+                        b2 = b2tmp;
+                    }
+
+                    if (b3tmp > 100)
+                    {
+                        b3 = 100;
+                    }
+                    else
+                    {
+                        b3 = b3tmp;
+                    }
+
+                    if (b4tmp > 100)
+                    {
+                        b4 = 100;
+                    }
+                    else
+                    {
+                        b4 = b4tmp;
+                    }
+
+                    if (b5tmp > 100)
+                    {
+                        b5 = 100;
+                    }
+                    else
+                    {
+                        b5 = b5tmp;
+                    }
+
+
+                    MySqlCommand comando1 = new MySqlCommand("UPDATE calificaciones set bloque1 = @bloque1, bloque2 = @bloque2, bloque3 = @bloque3, bloque4 = @bloque4, bloque5 = @bloque5, " +
+                        "observaciones = @comentarios WHERE id_materia = @id_materia AND no_control = @no_control;");
                     comando1.Connection = Conexion;
 
                     MySqlParameter parametro0 = new MySqlParameter();
