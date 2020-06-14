@@ -12,9 +12,18 @@ namespace Proyecto_Calificaciones
 {
     public partial class Menu_Maestro : Form
     {
+        private string usr1;
+        private int perfil;
+
         public Menu_Maestro()
         {
             InitializeComponent();
+        }
+
+        public Menu_Maestro(string usr1, int perfil)
+        {
+            this.usr1 = usr1;
+            this.perfil = perfil;
         }
     }
 }

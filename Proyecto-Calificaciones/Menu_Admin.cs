@@ -12,9 +12,18 @@ namespace Proyecto_Calificaciones
 {
     public partial class Menu_Admin : Form
     {
+        private string usr1;
+        private int perfil;
+
         public Menu_Admin()
         {
             InitializeComponent();
+        }
+
+        public Menu_Admin(string usr1, int perfil)
+        {
+            this.usr1 = usr1;
+            this.perfil = perfil;
         }
 
         private void Menu_Admin_Load(object sender, EventArgs e)
