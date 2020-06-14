@@ -158,7 +158,7 @@ namespace Proyecto_Calificaciones
 
                     if (textBox1.Text == usr1 && textBox2.Text == pass_base)
                     {
-                        if (perfil == 1)
+                        if (perfil == 1 | perfil == 2)
                         {
                             Menu_Admin administrador = new Menu_Admin();
                             administrador.Show();
