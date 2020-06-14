@@ -52,7 +52,7 @@ namespace Proyecto_Calificaciones
 
         private void consultarCalificacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Consulta_G_Calificaciones C_G_Calificaciones = new Consulta_G_Calificaciones();
+            Consulta_G_Calificaciones C_G_Calificaciones = new Consulta_G_Calificaciones(usr1, perfil, id_asignacion);
             C_G_Calificaciones.MdiParent = this;
             C_G_Calificaciones.Show();
         }
