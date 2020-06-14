@@ -13,8 +13,12 @@ namespace Proyecto_Calificaciones
 {
     public partial class Alta_Calificaciones : Form
     {
-        public Alta_Calificaciones()
+        
+        public Alta_Calificaciones(string usr1, int perfil, int id_asignacion)
         {
+            this.usr1 = usr1;
+            this.perfil = perfil;
+            this.id_asignacion = id_asignacion;
             InitializeComponent();
         }
 
@@ -23,6 +27,10 @@ namespace Proyecto_Calificaciones
 
         int asignacion = 0;
         int id_materia = 0;
+        private string usr1;
+        private int perfil;
+        private int id_asignacion;
+        int asignacionLogin = 0;
 
         private void comboBox5_DropDown(object sender, EventArgs e)
         {
@@ -33,8 +41,147 @@ namespace Proyecto_Calificaciones
         {
             this.WindowState = FormWindowState.Minimized;
             this.WindowState = FormWindowState.Maximized;
+            MuestraPrivilegios();
         }
 
+        private void AplicaPrivilegios()
+        {
+            if (perfil == 1 | perfil == 2)
+            {
+                AsignacionID();
+                AsignarIDMateria();
+                MostrarTabla(asignacion);
+            }
+            else if (perfil == 0)
+            {
+                AsignarIDMateria();
+                MostrarTabla(asignacionLogin);
+            }
+        }
+        private void MuestraPrivilegios()
+        {
+            if (perfil == 1 | perfil == 2)
+            {
+                label2.Enabled = true;
+                label3.Enabled = true;
+                comboBox1.Enabled = true;
+                comboBox2.Enabled = true;
+            }
+            else if (perfil == 0)
+            {
+                label2.Enabled = false;
+                label3.Enabled = false;
+                comboBox1.Enabled = false;
+                comboBox2.Enabled = false;
+
+                AsignacionDeLoginAlPrograma();
+            }
+        }
+        private void AsignacionDeLoginAlPrograma()
+        {
+            asignacionLogin = id_asignacion;
+
+            if (asignacionLogin == 1)
+            {
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
+            }
+            else if (asignacionLogin == 2)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 3)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 4)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 5)
+            {
+                comboBox1.SelectedIndex = 1;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 6)
+            {
+                comboBox1.SelectedIndex = 1;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 7)
+            {
+                comboBox1.SelectedIndex = 1;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 8)
+            {
+                comboBox1.SelectedIndex = 2;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 9)
+            {
+                comboBox1.SelectedIndex = 2;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 10)
+            {
+                comboBox1.SelectedIndex = 2;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 11)
+            {
+                comboBox1.SelectedIndex = 3;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 12)
+            {
+                comboBox1.SelectedIndex = 3;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 13)
+            {
+                comboBox1.SelectedIndex = 3;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 14)
+            {
+                comboBox1.SelectedIndex = 4;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 15)
+            {
+                comboBox1.SelectedIndex = 4;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 16)
+            {
+                comboBox1.SelectedIndex = 4;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 17)
+            {
+                comboBox1.SelectedIndex = 5;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 18)
+            {
+                comboBox1.SelectedIndex = 5;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 19)
+            {
+                comboBox1.SelectedIndex = 5;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 20)
+            {
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
+            }
+        }
         private void CargaMaterias()
         {
             String grado = comboBox1.Text;
@@ -165,10 +312,8 @@ namespace Proyecto_Calificaciones
             }
             Conexion.Close();
         }
-        private void MostrarTabla()
+        private void MostrarTabla(int id_a)
         {
-            AsignacionID();
-            AsignarIDMateria();
 
             String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
             Conexion.ConnectionString = CadenaConexion;
@@ -179,7 +324,7 @@ namespace Proyecto_Calificaciones
                 "on c.id_materia = m.id_materia " +
                 "inner join alumnos al " +
                 "on c.no_control = al.no_control " +
-                "where al.id_asignacion = " + asignacion + " and c.id_materia = " + id_materia + " " +
+                "where al.id_asignacion = " + id_a + " and c.id_materia = " + id_materia + " " +
                 "ORDER by al.apellidos asc;");
 
             comandoconsulta.Connection = Conexion;
@@ -361,8 +506,7 @@ namespace Proyecto_Calificaciones
             }
             else
             {
-                AsignacionID();
-                MostrarTabla();
+                AplicaPrivilegios();
             }
 
         }

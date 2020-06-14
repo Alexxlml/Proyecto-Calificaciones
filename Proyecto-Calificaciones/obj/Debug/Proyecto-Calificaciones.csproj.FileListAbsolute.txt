@@ -40,3 +40,4 @@ D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calific
 D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\obj\Debug\Proyecto-Calificaciones.csproj.CopyComplete
 D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\obj\Debug\Proyecto-Calificaciones.exe
 D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\obj\Debug\Proyecto-Calificaciones.pdb
+D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\obj\Debug\Proyecto-Calificaciones.csprojAssemblyReference.cache

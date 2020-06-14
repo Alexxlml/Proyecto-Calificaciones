@@ -45,7 +45,7 @@ namespace Proyecto_Calificaciones
 
         private void regsitrarCalificacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Alta_Calificaciones A_Calificaciones = new Alta_Calificaciones();
+            Alta_Calificaciones A_Calificaciones = new Alta_Calificaciones(usr1,perfil,id_asignacion);
             A_Calificaciones.MdiParent = this;
             A_Calificaciones.Show();
         }
