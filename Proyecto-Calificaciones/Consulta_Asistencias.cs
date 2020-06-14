@@ -21,50 +21,19 @@ namespace Proyecto_Calificaciones
             InitializeComponent();
         }
 
+        int asignacion = 0;
+
         private void Consulta_Asistencias_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
             this.WindowState = FormWindowState.Maximized;
-            ConsultaGeneral();
         }
 
         MySqlConnection Conexion = new MySqlConnection();
 
-        private void dateTimePicker1_CloseUp(object sender, EventArgs e)
-        {
-            ConsultaEspecifica();
-        }
-        private void ConsultaGeneral() 
-        {
-            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
-            Conexion.ConnectionString = CadenaConexion;
-
-            MySqlCommand comandoconsulta = new MySqlCommand("SELECT al.no_control, CONCAT(al.apellidos,' ',al.nombre) as nombre, a.grado, a.grupo, asis.asistencia, asis.asistencia_justificada, asis.fecha, al.foto " +
-                "FROM alumnos al " +
-                "INNER JOIN asignacion a " +
-                "ON	al.id_asignacion = a.id_asignacion " +
-                "INNER JOIN asistencias asis " +
-                "ON al.no_control = asis.no_control;");
-            comandoconsulta.Connection = Conexion;
-            MySqlDataAdapter con = new MySqlDataAdapter(comandoconsulta);
-            DataSet Set = new DataSet();
-
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.RowTemplate.Height = 120;
-            dataGridView1.AllowUserToAddRows = false;
-
-            con.Fill(Set);
-
-            dataGridView1.DataSource = Set.Tables[0];
-
-            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
-            imageColumn = (DataGridViewImageColumn)dataGridView1.Columns[7];
-            imageColumn.ImageLayout = DataGridViewImageCellLayout.Stretch;
-
-            con.Dispose();
-        }
         private void ConsultaEspecifica() 
         {
+            AsignacionID();
             String fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
             String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
@@ -76,7 +45,8 @@ namespace Proyecto_Calificaciones
                 "ON	al.id_asignacion = a.id_asignacion " +
                 "INNER JOIN asistencias asis " +
                 "ON al.no_control = asis.no_control " +
-                "WHERE asis.fecha like '"+fecha+"%';");
+                "WHERE a.id_asignacion = '" + asignacion + "' AND asis.fecha like '"+fecha+"%';");
+
             comandoconsulta.Connection = Conexion;
             MySqlDataAdapter con = new MySqlDataAdapter(comandoconsulta);
             DataSet Set = new DataSet();
@@ -108,7 +78,9 @@ namespace Proyecto_Calificaciones
                 "ON	al.id_asignacion = a.id_asignacion " +
                 "INNER JOIN asistencias asis " +
                 "ON al.no_control = asis.no_control " +
-                "WHERE asis.fecha like '" + fecha + "%';");
+                "WHERE a.id_asignacion = '" + asignacion + "' " +
+                "AND asis.asistencia = 'SI' " +
+                "AND asis.fecha like '" + fecha + "%';");
             comandoconsulta.Connection = Conexion;
             MySqlDataAdapter con = new MySqlDataAdapter(comandoconsulta);
             DataSet Set = new DataSet();
@@ -190,7 +162,8 @@ namespace Proyecto_Calificaciones
                 "ON	al.id_asignacion = a.id_asignacion " +
                 "INNER JOIN asistencias asis " +
                 "ON al.no_control = asis.no_control " +
-                "WHERE asis.asistencia = 'NO' " +
+                "WHERE a.id_asignacion = '" + asignacion + "' " +
+                "AND asis.asistencia = 'NO' " +
                 "AND asis.fecha like '" + fecha + "%';");
 
             comandoconsulta.Connection = Conexion;
@@ -263,6 +236,83 @@ namespace Proyecto_Calificaciones
             documento.Close();
             MessageBox.Show("El reporte de Inasistencias ha sido creado con éxito");
         }
+        private void AsignacionID()
+        {
+            asignacion = 0;
+
+            if (comboBox1.Text == "1" && comboBox2.Text == "A")
+            {
+                asignacion = 2;
+            }
+            else if (comboBox1.Text == "1" && comboBox2.Text == "B")
+            {
+                asignacion = 3;
+            }
+            else if (comboBox1.Text == "1" && comboBox2.Text == "C")
+            {
+                asignacion = 4;
+            }
+            else if (comboBox1.Text == "2" && comboBox2.Text == "A")
+            {
+                asignacion = 5;
+            }
+            else if (comboBox1.Text == "2" && comboBox2.Text == "B")
+            {
+                asignacion = 6;
+            }
+            else if (comboBox1.Text == "2" && comboBox2.Text == "C")
+            {
+                asignacion = 7;
+            }
+            else if (comboBox1.Text == "3" && comboBox2.Text == "A")
+            {
+                asignacion = 8;
+            }
+            else if (comboBox1.Text == "3" && comboBox2.Text == "B")
+            {
+                asignacion = 9;
+            }
+            else if (comboBox1.Text == "3" && comboBox2.Text == "C")
+            {
+                asignacion = 10;
+            }
+            else if (comboBox1.Text == "4" && comboBox2.Text == "A")
+            {
+                asignacion = 11;
+            }
+            else if (comboBox1.Text == "4" && comboBox2.Text == "B")
+            {
+                asignacion = 12;
+            }
+            else if (comboBox1.Text == "4" && comboBox2.Text == "C")
+            {
+                asignacion = 13;
+            }
+            else if (comboBox1.Text == "5" && comboBox2.Text == "A")
+            {
+                asignacion = 14;
+            }
+            else if (comboBox1.Text == "5" && comboBox2.Text == "B")
+            {
+                asignacion = 15;
+            }
+            else if (comboBox1.Text == "5" && comboBox2.Text == "C")
+            {
+                asignacion = 16;
+            }
+            else if (comboBox1.Text == "6" && comboBox2.Text == "A")
+            {
+                asignacion = 17;
+            }
+            else if (comboBox1.Text == "6" && comboBox2.Text == "B")
+            {
+                asignacion = 18;
+            }
+            else if (comboBox1.Text == "6" && comboBox2.Text == "C")
+            {
+                asignacion = 19;
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -274,6 +324,11 @@ namespace Proyecto_Calificaciones
         {
             ConsultaInasistenciaPDF();
             ImprimirInasistencia();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ConsultaEspecifica();
         }
     }
 
