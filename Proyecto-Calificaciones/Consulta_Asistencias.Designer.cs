@@ -190,6 +190,7 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(231, 589);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 40);
@@ -200,6 +201,7 @@
             // 
             // btn_Eliminar
             // 
+            this.btn_Eliminar.Enabled = false;
             this.btn_Eliminar.Location = new System.Drawing.Point(896, 589);
             this.btn_Eliminar.Name = "btn_Eliminar";
             this.btn_Eliminar.Size = new System.Drawing.Size(150, 40);
@@ -225,8 +227,9 @@
             this.dataGridView2.Location = new System.Drawing.Point(12, 312);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 10;
-            this.dataGridView2.Size = new System.Drawing.Size(1240, 271);
+            this.dataGridView2.Size = new System.Drawing.Size(1240, 134);
             this.dataGridView2.TabIndex = 21;
+            this.dataGridView2.Visible = false;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -283,6 +286,7 @@
             this.dataGridView3.RowHeadersWidth = 10;
             this.dataGridView3.Size = new System.Drawing.Size(1240, 131);
             this.dataGridView3.TabIndex = 22;
+            this.dataGridView3.Visible = false;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -412,14 +416,14 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dataGridView3);
-            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_Eliminar);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView3);
+            this.Controls.Add(this.dataGridView2);
             this.Name = "Consulta_Asistencias";
             this.Text = "Consulta_Asistencias";
             this.Load += new System.EventHandler(this.Consulta_Asistencias_Load);

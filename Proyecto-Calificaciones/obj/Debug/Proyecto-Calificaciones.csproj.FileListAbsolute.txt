@@ -17,7 +17,6 @@ D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calific
 D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\bin\Debug\System.Numerics.Vectors.dll
 D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\bin\Debug\itextsharp.xml
 D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\bin\Debug\MySql.Data.xml
-D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\obj\Debug\Proyecto-Calificaciones.csprojAssemblyReference.cache
 D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\obj\Debug\Proyecto-Calificaciones.exe.config
 D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\obj\Debug\Proyecto_Calificaciones.Alta_Alumno.resources
 D:\Documents\Proyectos_VisualStudio2020\Proyecto-Calificaciones\Proyecto-Calificaciones\obj\Debug\Proyecto_Calificaciones.Alta_Asistencias.resources

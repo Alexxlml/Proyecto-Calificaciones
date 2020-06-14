@@ -302,7 +302,6 @@ namespace Proyecto_Calificaciones
             double dos_digitos = (Math.Truncate(promedio * 100) / 100);
 
             String promedio_texto = dos_digitos.ToString();
-            MessageBox.Show(promedio_texto);
 
             Document documento = new Document();
             PdfWriter wri = PdfWriter.GetInstance(documento, new FileStream("C:/NET/Kardex(" + no_control + ").pdf", FileMode.Create));

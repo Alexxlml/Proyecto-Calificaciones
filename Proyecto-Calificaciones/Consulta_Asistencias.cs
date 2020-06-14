@@ -16,22 +16,181 @@ namespace Proyecto_Calificaciones
 {
     public partial class Consulta_Asistencias : Form
     {
-        public Consulta_Asistencias()
+
+        public Consulta_Asistencias(string usr1, int perfil, int id_asignacion)
         {
+            this.usr1 = usr1;
+            this.perfil = perfil;
+            this.id_asignacion = id_asignacion;
             InitializeComponent();
         }
 
         int asignacion = 0;
+        int asignacionLogin = 0;
 
         private void Consulta_Asistencias_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
             this.WindowState = FormWindowState.Maximized;
+            MuestraPrivilegios();
         }
 
         MySqlConnection Conexion = new MySqlConnection();
+        private string usr1;
+        private int perfil;
+        private int id_asignacion;
 
-        private void ConsultaEspecifica() 
+        private void AplicaPrivilegios()
+        {
+            if (perfil == 1 | perfil == 2)
+            {
+                ConsultaEspecifica(asignacion);
+            }
+            else if (perfil == 0)
+            {
+                ConsultaEspecifica(asignacionLogin);
+            }
+        }
+        private void MuestraPrivilegios()
+        {
+            if (perfil == 1 | perfil == 2)
+            {
+                label3.Enabled = true;
+                label4.Enabled = true;
+                comboBox1.Enabled = true;
+                comboBox2.Enabled = true;
+                button3.Enabled = true;
+
+                label3.Visible = true;
+                label4.Visible = true;
+                comboBox1.Visible = true;
+                comboBox2.Visible = true;
+                button3.Visible = true;
+
+            }
+            else if (perfil == 0)
+            {
+                label3.Enabled = false;
+                label4.Enabled = false;
+                comboBox1.Enabled = false;
+                comboBox2.Enabled = false;
+                //button3.Enabled = false;
+
+                //label3.Visible = false;
+                //label4.Visible = false;
+                //comboBox1.Visible = false;
+                //comboBox2.Visible = false;
+                //button3.Visible = false;
+                AsignacionDeLoginAlPrograma();
+
+            }
+        }
+        private void AsignacionDeLoginAlPrograma()
+        {
+            asignacionLogin = id_asignacion;
+
+            if (asignacionLogin == 1)
+            {
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
+            }
+            else if (asignacionLogin == 2)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 3)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 4)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 5)
+            {
+                comboBox1.SelectedIndex = 1;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 6)
+            {
+                comboBox1.SelectedIndex = 1;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 7)
+            {
+                comboBox1.SelectedIndex = 1;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 8)
+            {
+                comboBox1.SelectedIndex = 2;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 9)
+            {
+                comboBox1.SelectedIndex = 2;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 10)
+            {
+                comboBox1.SelectedIndex = 2;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 11)
+            {
+                comboBox1.SelectedIndex = 3;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 12)
+            {
+                comboBox1.SelectedIndex = 3;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 13)
+            {
+                comboBox1.SelectedIndex = 3;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 14)
+            {
+                comboBox1.SelectedIndex = 4;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 15)
+            {
+                comboBox1.SelectedIndex = 4;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 16)
+            {
+                comboBox1.SelectedIndex = 4;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 17)
+            {
+                comboBox1.SelectedIndex = 5;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 18)
+            {
+                comboBox1.SelectedIndex = 5;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 19)
+            {
+                comboBox1.SelectedIndex = 5;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 20)
+            {
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
+            }
+        }
+        private void ConsultaEspecifica(int id_a)
         {
             AsignacionID();
             String fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
@@ -45,7 +204,7 @@ namespace Proyecto_Calificaciones
                 "ON	al.id_asignacion = a.id_asignacion " +
                 "INNER JOIN asistencias asis " +
                 "ON al.no_control = asis.no_control " +
-                "WHERE a.id_asignacion = '" + asignacion + "' AND asis.fecha like '"+fecha+"%';");
+                "WHERE a.id_asignacion = '" + id_a + "' AND asis.fecha like '" + fecha + "%';");
 
             comandoconsulta.Connection = Conexion;
             MySqlDataAdapter con = new MySqlDataAdapter(comandoconsulta);
@@ -65,7 +224,7 @@ namespace Proyecto_Calificaciones
 
             con.Dispose();
         }
-        private void ConsultaAsistenciaPDF() 
+        private void ConsultaAsistenciaPDF()
         {
             String fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
@@ -95,7 +254,7 @@ namespace Proyecto_Calificaciones
 
             con.Dispose();
         }
-        private void ImprimirAsistencia() 
+        private void ImprimirAsistencia()
         {
             String fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
@@ -149,7 +308,7 @@ namespace Proyecto_Calificaciones
             documento.Close();
             MessageBox.Show("El reporte de asistencias ha sido creado con éxito");
         }
-        private void ConsultaInasistenciaPDF() 
+        private void ConsultaInasistenciaPDF()
         {
             String fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
@@ -180,7 +339,7 @@ namespace Proyecto_Calificaciones
 
             con.Dispose();
         }
-        private void ImprimirInasistencia() 
+        private void ImprimirInasistencia()
         {
             String fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
@@ -328,7 +487,9 @@ namespace Proyecto_Calificaciones
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ConsultaEspecifica();
+            AplicaPrivilegios();
+            button1.Enabled = true;
+            btn_Eliminar.Enabled = true;
         }
     }
 

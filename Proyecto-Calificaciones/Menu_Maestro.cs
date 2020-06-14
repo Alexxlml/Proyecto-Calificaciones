@@ -38,7 +38,7 @@ namespace Proyecto_Calificaciones
 
         private void consultarAsistenciaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Consulta_Asistencias C_Asistencias = new Consulta_Asistencias();
+            Consulta_Asistencias C_Asistencias = new Consulta_Asistencias(usr1, perfil, id_asignacion);
             C_Asistencias.MdiParent = this;
             C_Asistencias.Show();
         }
