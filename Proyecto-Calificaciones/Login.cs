@@ -28,6 +28,7 @@ namespace Proyecto_Calificaciones
         string usr1 = "";
         string resp = "";
         int perfil = 0;
+        int id_asignacion;
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -156,17 +157,43 @@ namespace Proyecto_Calificaciones
                     }
                     conexion.Close();
 
+                    MySqlCommand comando9 = new MySqlCommand("select id_asignacion from usuarios where id_usuario = '" + usuario + "';");
+                    comando9.Connection = conexion;
+                    conexion.Open();
+                    MySqlDataReader myreader9 = comando9.ExecuteReader();
+                    try
+                    {
+                        if (myreader9.HasRows)
+                        {
+                            while (myreader9.Read())
+                            {
+                                id_asignacion = (int)myreader9[0];
+
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    conexion.Close();
+
                     if (textBox1.Text == usr1 && textBox2.Text == pass_base)
                     {
                         if (perfil == 1 | perfil == 2)
                         {
-                            Menu_Admin administrador = new Menu_Admin();
+                            Menu_Admin administrador = new Menu_Admin(usr1, perfil, id_asignacion);
                             administrador.Show();
                             this.Hide();
+                            
                         }
                         else if (perfil == 0)
                         {
-                            Menu_Maestro maestro = new Menu_Maestro();
+                            Menu_Maestro maestro = new Menu_Maestro(usr1, perfil, id_asignacion);
                             maestro.Show();
                             this.Hide();
                         }

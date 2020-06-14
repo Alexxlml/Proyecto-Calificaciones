@@ -16,7 +16,7 @@ namespace Proyecto_Calificaciones
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Menu_Admin());
+            Application.Run(new Login());
         }
     }
 }

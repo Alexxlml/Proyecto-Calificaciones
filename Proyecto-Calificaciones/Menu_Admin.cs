@@ -14,16 +14,14 @@ namespace Proyecto_Calificaciones
     {
         private string usr1;
         private int perfil;
+        private int id_asignacion;
 
-        public Menu_Admin()
-        {
-            InitializeComponent();
-        }
-
-        public Menu_Admin(string usr1, int perfil)
+        public Menu_Admin(string usr1, int perfil, int id_asignacion)
         {
             this.usr1 = usr1;
             this.perfil = perfil;
+            this.id_asignacion = id_asignacion;
+            InitializeComponent();
         }
 
         private void Menu_Admin_Load(object sender, EventArgs e)
@@ -75,7 +73,7 @@ namespace Proyecto_Calificaciones
 
         private void registrarAsistenciaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Alta_Asistencias A_Asistencias = new Alta_Asistencias();
+            Alta_Asistencias A_Asistencias = new Alta_Asistencias(usr1, perfil, id_asignacion);
             A_Asistencias.MdiParent = this;
             A_Asistencias.Show();
         }

@@ -66,12 +66,14 @@
             this.registrarAsistenciaToolStripMenuItem.Name = "registrarAsistenciaToolStripMenuItem";
             this.registrarAsistenciaToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.registrarAsistenciaToolStripMenuItem.Text = "Registrar Asistencia";
+            this.registrarAsistenciaToolStripMenuItem.Click += new System.EventHandler(this.registrarAsistenciaToolStripMenuItem_Click);
             // 
             // consultarAsistenciaToolStripMenuItem
             // 
             this.consultarAsistenciaToolStripMenuItem.Name = "consultarAsistenciaToolStripMenuItem";
             this.consultarAsistenciaToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.consultarAsistenciaToolStripMenuItem.Text = "Consultar Asistencia";
+            this.consultarAsistenciaToolStripMenuItem.Click += new System.EventHandler(this.consultarAsistenciaToolStripMenuItem_Click);
             // 
             // calificacionesToolStripMenuItem
             // 
@@ -87,12 +89,14 @@
             this.regsitrarCalificacionesToolStripMenuItem.Name = "regsitrarCalificacionesToolStripMenuItem";
             this.regsitrarCalificacionesToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.regsitrarCalificacionesToolStripMenuItem.Text = "Regsitrar Calificaciones";
+            this.regsitrarCalificacionesToolStripMenuItem.Click += new System.EventHandler(this.regsitrarCalificacionesToolStripMenuItem_Click);
             // 
             // consultarCalificacionesToolStripMenuItem
             // 
             this.consultarCalificacionesToolStripMenuItem.Name = "consultarCalificacionesToolStripMenuItem";
             this.consultarCalificacionesToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.consultarCalificacionesToolStripMenuItem.Text = "Consultar Calificaciones";
+            this.consultarCalificacionesToolStripMenuItem.Click += new System.EventHandler(this.consultarCalificacionesToolStripMenuItem_Click);
             // 
             // kardexToolStripMenuItem
             // 
@@ -105,8 +109,9 @@
             // consultarKardexToolStripMenuItem
             // 
             this.consultarKardexToolStripMenuItem.Name = "consultarKardexToolStripMenuItem";
-            this.consultarKardexToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.consultarKardexToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.consultarKardexToolStripMenuItem.Text = "Consultar Kardex";
+            this.consultarKardexToolStripMenuItem.Click += new System.EventHandler(this.consultarKardexToolStripMenuItem_Click);
             // 
             // Menu_Maestro
             // 
@@ -119,6 +124,7 @@
             this.Name = "Menu_Maestro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menú";
+            this.Load += new System.EventHandler(this.Menu_Maestro_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

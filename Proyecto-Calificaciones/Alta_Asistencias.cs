@@ -13,25 +13,178 @@ namespace Proyecto_Calificaciones
 {
     public partial class Alta_Asistencias : Form
     {
-        public Alta_Asistencias()
+        private string usr1;
+        private int perfil;
+        private int id_asignacion;
+        public Alta_Asistencias(string usr1, int perfil, int id_asignacion)
         {
+            this.usr1 = usr1;
+            this.perfil = perfil;
+            this.id_asignacion = id_asignacion;
             InitializeComponent();
         }
 
         int asignacion = 0;
+        int asignacionLogin = 0;
+
+        String ra_usuario = "", ra_fecha = "", fecha_dt = "";
+
         MySqlConnection Conexion = new MySqlConnection();
+        
 
         private void Alta_Asistencias_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
             this.WindowState = FormWindowState.Maximized;
+            RevisarProfesor();
+            RevisaRA();
+            MuestraPrivilegios();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             MostrarTabla();
         }
+        private void MuestraPrivilegios() 
+        {
+            if (perfil == 1 | perfil == 2)
+            {
+                label3.Enabled = true;
+                label4.Enabled = true;
+                comboBox1.Enabled = true;
+                comboBox2.Enabled = true;
+                button3.Enabled = true;
 
+                label3.Visible = true;
+                label4.Visible = true;
+                comboBox1.Visible = true;
+                comboBox2.Visible = true;
+                button3.Visible = true;
+            }
+            else if (perfil == 0)
+            {
+                label3.Enabled = false;
+                label4.Enabled = false;
+                comboBox1.Enabled = false;
+                comboBox2.Enabled = false;
+                button3.Enabled = false;
+
+                //label3.Visible = false;
+                //label4.Visible = false;
+                //comboBox1.Visible = false;
+                //comboBox2.Visible = false;
+                button3.Visible = false;
+
+                AsignacionDeLoginAlPrograma();
+                MostrarTabla();
+            }
+        }
+        private void AsignacionDeLoginAlPrograma()
+        {
+            asignacionLogin = id_asignacion;
+
+            if (asignacionLogin == 1)
+            {
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
+            }
+            else if (asignacionLogin == 2)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 3)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 4)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 5)
+            {
+                comboBox1.SelectedIndex = 1;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 6)
+            {
+                comboBox1.SelectedIndex = 1;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 7)
+            {
+                comboBox1.SelectedIndex = 1;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 8)
+            {
+                comboBox1.SelectedIndex = 2;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 9)
+            {
+                comboBox1.SelectedIndex = 2;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 10)
+            {
+                comboBox1.SelectedIndex = 2;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 11)
+            {
+                comboBox1.SelectedIndex = 3;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 12)
+            {
+                comboBox1.SelectedIndex = 3;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 13)
+            {
+                comboBox1.SelectedIndex = 3;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 14)
+            {
+                comboBox1.SelectedIndex = 4;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 15)
+            {
+                comboBox1.SelectedIndex = 4;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 16)
+            {
+                comboBox1.SelectedIndex = 4;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 17)
+            {
+                comboBox1.SelectedIndex = 5;
+                comboBox2.SelectedIndex = 0;
+            }
+            else if (asignacionLogin == 18)
+            {
+                comboBox1.SelectedIndex = 5;
+                comboBox2.SelectedIndex = 1;
+            }
+            else if (asignacionLogin == 19)
+            {
+                comboBox1.SelectedIndex = 5;
+                comboBox2.SelectedIndex = 2;
+            }
+            else if (asignacionLogin == 20)
+            {
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
+            }
+        }
         private void AsignacionID()
         {
             asignacion = 0;
@@ -183,8 +336,7 @@ namespace Proyecto_Calificaciones
 
 
 
-                        MySqlCommand comando1 = new MySqlCommand("UPDATE calificaciones set bloque1 = @bloque1, bloque2 = @bloque2, bloque3 = @bloque3, bloque4 = @bloque4, bloque5 = @bloque5, " +
-                            "observaciones = @comentarios WHERE id_materia = @id_materia AND no_control = @no_control;");
+                        MySqlCommand comando1 = new MySqlCommand("INSERT INTO asistencias values (@no_control, @asistencia, @asistencia_justificada, @fecha_completa);");
                         comando1.Connection = Conexion;
 
                         MySqlParameter parametro1 = new MySqlParameter();
@@ -212,13 +364,15 @@ namespace Proyecto_Calificaciones
                             Conexion.Open();
                             comando1.ExecuteNonQuery();
                             bandera = true;
+                            Conexion.Close();
+                            RegistroDiario();
                         }
-                        catch
+                        catch(Exception err)
                         {
-                            MessageBox.Show("Hubo un error");
+                            MessageBox.Show("Hubo un error \n\n" + err);
                             bandera = false;
                         }
-                        Conexion.Close();
+                        
                     }
                     if (bandera == true)
                     {
@@ -235,6 +389,92 @@ namespace Proyecto_Calificaciones
                     MessageBox.Show("Ha ocurrido un error" + err);
                 }
 
+            }
+        }
+        private void RegistroDiario() 
+        {
+            String fecha_corta = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+
+            MySqlCommand comando1 = new MySqlCommand("INSERT INTO registro_asistencias values (@id_usuario, @fecha_corta)");
+            comando1.Connection = Conexion;
+
+            MySqlParameter parametro1 = new MySqlParameter();
+            parametro1.ParameterName = "@id_usuario";
+            parametro1.Value = usr1;
+            comando1.Parameters.Add(parametro1);
+
+            MySqlParameter parametro2 = new MySqlParameter();
+            parametro2.ParameterName = "@fecha_corta";
+            parametro2.Value = fecha_corta;
+            comando1.Parameters.Add(parametro2);
+
+            try
+            {
+                Conexion.Open();
+                comando1.ExecuteNonQuery();
+                Conexion.Close();
+            }
+            catch(Exception err) 
+            {
+                MessageBox.Show(err + "");
+            }
+        }
+        private void RevisarProfesor() 
+        {
+            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            Conexion.ConnectionString = CadenaConexion;
+
+            MySqlCommand comando2 = new MySqlCommand("Select id_usuario, DATE_FORMAT(fecha, '%d/%m/%Y') as fecha from registro_asistencias Where id_usuario = @id_usuario");
+            comando2.Connection = Conexion;
+
+            MySqlParameter parametro1 = new MySqlParameter();
+            parametro1.ParameterName = "@id_usuario";
+            parametro1.Value = usr1;
+            comando2.Parameters.Add(parametro1);
+
+            Conexion.Open();
+            MySqlDataReader myreader = comando2.ExecuteReader();
+
+            if (myreader.HasRows)
+            {
+                while (myreader.Read())
+                {
+                    ra_usuario = myreader[0] + "";
+                    ra_fecha = myreader[1] + "";
+                }
+            }
+            else
+            {
+
+            }
+            Conexion.Close();
+        }
+        private void RevisaRA() 
+        {
+            fecha_dt = dateTimePicker1.Value.ToString("dd/MM/yyyy");
+
+            if (usr1 == ra_usuario && ra_fecha == fecha_dt)
+            {
+                dateTimePicker1.Enabled = false;
+                dataGridView1.Enabled = false;
+                label1.Enabled = false;
+                label2.Enabled = false;
+                label3.Enabled = false;
+                label4.Enabled = false;
+                comboBox1.Enabled = false;
+                comboBox2.Enabled = false;
+                button1.Enabled = false;
+                button2.Enabled = false;
+                button3.Enabled = false;
+
+                
+                button3.Visible = false;
+
+                MessageBox.Show("Ya has tomado asistencia este día, si te equivocaste puedes modificar la asistencia en la opción correspondiente", "Advertencia");
+            }
+            else 
+            { 
+                
             }
         }
 
