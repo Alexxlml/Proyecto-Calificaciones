@@ -360,7 +360,7 @@ namespace Proyecto_Calificaciones
 
                 if (bandera == true)
                 {
-                    MessageBox.Show("Se registraron las calificaciones con éxito", "Modificar asistencia");
+                    MessageBox.Show("Se registraron las calificaciones con éxito", "Modificar Calificaciones");
                 }
                 else
                 {

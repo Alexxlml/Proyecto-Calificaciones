@@ -136,10 +136,116 @@ namespace Proyecto_Calificaciones
 
             con.Dispose();
         }
+        private void SeleccionaTodos()
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
+                chk.Value = !(chk.Value == null ? false : (bool)chk.Value);
+            }
+        }
+        private void RegistrarAsistencias()
+        {
+            bool bandera = false;
+            DialogResult registrar = MessageBox.Show("¿Deseas registrar la asistencia de los alumnos seleccionados?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (registrar == DialogResult.Cancel)
+            {
+
+            }
+            else
+            {
+
+                try
+                {
+
+                    for (int i = 0; i < dataGridView1.RowCount; i++)
+                    {
+
+                        String no_control, asistencia, asistencia_justificada;
+                        String fecha_completa = dateTimePicker1.Value.ToString("yyyy/MM/dd HH:mm:ss");
+
+                        AsignacionID();
+
+                        bool asistencia_grid = Convert.ToBoolean(dataGridView1.Rows[i].Cells[0].Value);
+                        no_control = dataGridView1.Rows[i].Cells[1].Value.ToString();
+
+                        if (asistencia_grid == true)
+                        {
+                            asistencia = "SI";
+                            asistencia_justificada = "NO";
+                        }
+                        else 
+                        {
+                            asistencia = "NO";
+                            asistencia_justificada = "NO";
+                        }
+
+
+
+                        MySqlCommand comando1 = new MySqlCommand("UPDATE calificaciones set bloque1 = @bloque1, bloque2 = @bloque2, bloque3 = @bloque3, bloque4 = @bloque4, bloque5 = @bloque5, " +
+                            "observaciones = @comentarios WHERE id_materia = @id_materia AND no_control = @no_control;");
+                        comando1.Connection = Conexion;
+
+                        MySqlParameter parametro1 = new MySqlParameter();
+                        parametro1.ParameterName = "@no_control";
+                        parametro1.Value = no_control;
+                        comando1.Parameters.Add(parametro1);
+
+                        MySqlParameter parametro2 = new MySqlParameter();
+                        parametro2.ParameterName = "@asistencia";
+                        parametro2.Value = asistencia;
+                        comando1.Parameters.Add(parametro2);
+
+                        MySqlParameter parametro3 = new MySqlParameter();
+                        parametro3.ParameterName = "@asistencia_justificada";
+                        parametro3.Value = asistencia_justificada;
+                        comando1.Parameters.Add(parametro3);
+
+                        MySqlParameter parametro4 = new MySqlParameter();
+                        parametro4.ParameterName = "@fecha_completa";
+                        parametro4.Value = fecha_completa;
+                        comando1.Parameters.Add(parametro4);
+
+                        try
+                        {
+                            Conexion.Open();
+                            comando1.ExecuteNonQuery();
+                            bandera = true;
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Hubo un error");
+                            bandera = false;
+                        }
+                        Conexion.Close();
+                    }
+                    if (bandera == true)
+                    {
+                        MessageBox.Show("Se registraron las asistencias con éxito", "Alta asistencia");
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("Ha ocurrido un error" + err);
+                }
+
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            SeleccionaTodos();
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            RegistrarAsistencias();
         }
     }
 }
