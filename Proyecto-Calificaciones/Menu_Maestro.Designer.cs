@@ -35,8 +35,6 @@
             this.calificacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regsitrarCalificacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarCalificacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kardexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultarKardexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,8 +42,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.asistenciasToolStripMenuItem,
-            this.calificacionesToolStripMenuItem,
-            this.kardexToolStripMenuItem});
+            this.calificacionesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1264, 24);
@@ -98,21 +95,6 @@
             this.consultarCalificacionesToolStripMenuItem.Text = "Consultar Calificaciones";
             this.consultarCalificacionesToolStripMenuItem.Click += new System.EventHandler(this.consultarCalificacionesToolStripMenuItem_Click);
             // 
-            // kardexToolStripMenuItem
-            // 
-            this.kardexToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.consultarKardexToolStripMenuItem});
-            this.kardexToolStripMenuItem.Name = "kardexToolStripMenuItem";
-            this.kardexToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.kardexToolStripMenuItem.Text = "Kardex";
-            // 
-            // consultarKardexToolStripMenuItem
-            // 
-            this.consultarKardexToolStripMenuItem.Name = "consultarKardexToolStripMenuItem";
-            this.consultarKardexToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.consultarKardexToolStripMenuItem.Text = "Consultar Kardex";
-            this.consultarKardexToolStripMenuItem.Click += new System.EventHandler(this.consultarKardexToolStripMenuItem_Click);
-            // 
             // Menu_Maestro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,7 +123,5 @@
         private System.Windows.Forms.ToolStripMenuItem calificacionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem regsitrarCalificacionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultarCalificacionesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem kardexToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consultarKardexToolStripMenuItem;
     }
 }

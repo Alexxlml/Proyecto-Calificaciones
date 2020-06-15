@@ -60,12 +60,14 @@ namespace Proyecto_Calificaciones
                 comboBox1.Enabled = true;
                 comboBox2.Enabled = true;
                 button3.Enabled = true;
+                btn_porcentaje.Enabled = true;
 
                 label3.Visible = true;
                 label4.Visible = true;
                 comboBox1.Visible = true;
                 comboBox2.Visible = true;
                 button3.Visible = true;
+                btn_porcentaje.Visible = true;
 
             }
             else if (perfil == 0)
@@ -74,6 +76,8 @@ namespace Proyecto_Calificaciones
                 label4.Enabled = false;
                 comboBox1.Enabled = false;
                 comboBox2.Enabled = false;
+                btn_porcentaje.Enabled = false;
+                btn_porcentaje.Visible = false;
                 //button3.Enabled = false;
 
                 //label3.Visible = false;
@@ -490,6 +494,58 @@ namespace Proyecto_Calificaciones
             AplicaPrivilegios();
             button1.Enabled = true;
             btn_Eliminar.Enabled = true;
+        }
+
+        private void btn_porcentaje_Click(object sender, EventArgs e)
+        {
+            ConsultaPorcentajes();
+            ImprimeExcel();
+        }
+
+        private void ConsultaPorcentajes() 
+        {
+            String fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+
+            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            Conexion.ConnectionString = CadenaConexion;
+
+            MySqlCommand comandoconsulta = new MySqlCommand("CALL porcentajes('" + fecha + "');");
+            comandoconsulta.Connection = Conexion;
+            MySqlDataAdapter con = new MySqlDataAdapter(comandoconsulta);
+            DataSet Set = new DataSet();
+
+            dataGridView4.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView4.RowTemplate.Height = 120;
+            dataGridView4.AllowUserToAddRows = false;
+
+            con.Fill(Set);
+
+            dataGridView4.DataSource = Set.Tables[0];
+
+            con.Dispose();
+        }
+        private void ImprimeExcel() 
+        {
+            if (dataGridView4.Rows.Count > 0)
+            {
+                Microsoft.Office.Interop.Excel.Application xcelApp = new Microsoft.Office.Interop.Excel.Application();
+                xcelApp.Application.Workbooks.Add(Type.Missing);
+
+                for (int i = 2; i < dataGridView4.Columns.Count + 1; i++)
+                {
+                    xcelApp.Cells[1, i] = dataGridView4.Columns[i - 1].HeaderText;
+                }
+
+                for (int i = 0; i < dataGridView4.Rows.Count; i++)
+                {
+                    for (int j = 1; j < dataGridView4.Columns.Count; j++)
+                    {
+                        xcelApp.Cells[i + 2, j + 1] = dataGridView4.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+                xcelApp.Columns.AutoFit();
+                xcelApp.Visible = true;
+            }
         }
     }
 
