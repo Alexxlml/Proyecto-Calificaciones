@@ -365,7 +365,6 @@ namespace Proyecto_Calificaciones
                             comando1.ExecuteNonQuery();
                             bandera = true;
                             Conexion.Close();
-                            RegistroDiario();
                         }
                         catch(Exception err)
                         {
@@ -376,6 +375,7 @@ namespace Proyecto_Calificaciones
                     }
                     if (bandera == true)
                     {
+                        RegistroDiario();
                         MessageBox.Show("Se registraron las asistencias con éxito", "Alta asistencia");
 
                     }
