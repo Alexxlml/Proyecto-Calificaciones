@@ -155,11 +155,18 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `boletas`.`registro_asistencias` (
   `id_usuario` VARCHAR(255) NOT NULL,
   `fecha` DATE NOT NULL,
+  `id_asignacion` INT NOT NULL,
   INDEX `fk_registro_asistencias_usuarios1_idx` (`id_usuario` ASC) VISIBLE,
-  PRIMARY KEY (`id_usuario`, `fecha`),
+  PRIMARY KEY (`id_usuario`, `fecha`, `id_asignacion`),
+  INDEX `fk_registro_asistencias_asignacion1_idx` (`id_asignacion` ASC) VISIBLE,
   CONSTRAINT `fk_registro_asistencias_usuarios1`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `boletas`.`usuarios` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_registro_asistencias_asignacion1`
+    FOREIGN KEY (`id_asignacion`)
+    REFERENCES `boletas`.`asignacion` (`id_asignacion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

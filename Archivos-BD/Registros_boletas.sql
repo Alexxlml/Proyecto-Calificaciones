@@ -37,6 +37,7 @@ INSERT INTO usuarios values ('alda@outlook.com','Aldair Gálvez Medina',aes_encr
 
 -- Insercion de Alumnos
 INSERT INTO alumnos values ('14090628','1234567890','Kevin de Víctor','Meléndez Farías',18,'12','A+','Ninguna','Fco. Madero No. 10','Víctor Meléndez','7341885495','Jessica Farías','7771598456','Andrés Farías','7341659845','');
+INSERT INTO alumnos values ('14090707','1234481256','Marco Alexis','Zacarias Rubio',18,'12','A+','Ninguna','E. Zapata No. 7','Marcos Zacarias','7771341262','Ana Rubio','7341645593','Edilia Zacarias','7341587963','');
 
 -- Materias Primer Grado
 INSERT INTO materias (grado,nombre) values ('1','Español I');
@@ -82,9 +83,8 @@ INSERT INTO materias (grado,nombre) values ('6','Educación Artística IV');
 
 -- Prueba de asistencia
 
-INSERT INTO asistencias values ('14090628','SI','NO','2020-06-07');
-INSERT INTO asistencias values ('14090628','SI','NO','2020-06-08');
-INSERT INTO asistencias values ('14090628','SI','NO','2020-06-09');
+INSERT INTO asistencias values ('14090628','SI','NO','2020-06-15');
+INSERT INTO asistencias values ('14090707','NO','NO','2020-06-15');
 -- Prueba de calificaciones
 
 INSERT INTO calificaciones values (35, '14090628','100','80','95','90','85','Sin comentarios');
