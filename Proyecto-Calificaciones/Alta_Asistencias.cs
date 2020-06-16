@@ -34,6 +34,7 @@ namespace Proyecto_Calificaciones
 
         private void Alta_Asistencias_Load(object sender, EventArgs e)
         {
+            dateTimePicker1.Value = DateTime.Now;
             this.WindowState = FormWindowState.Minimized;
             this.WindowState = FormWindowState.Maximized;
             RevisarProfesor();
