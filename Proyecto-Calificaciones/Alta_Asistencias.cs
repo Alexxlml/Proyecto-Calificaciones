@@ -27,60 +27,41 @@ namespace Proyecto_Calificaciones
         int asignacion = 0;
         int asignacionLogin = 0;
 
-        String ra_usuario = "", ra_fecha = "", fecha_dt = "";
+        int ra_idasignacion = 0;
+        String ra_fecha = "", fecha_dt = "";
 
         MySqlConnection Conexion = new MySqlConnection();
-        
+
 
         private void Alta_Asistencias_Load(object sender, EventArgs e)
         {
             dateTimePicker1.Value = DateTime.Now;
             this.WindowState = FormWindowState.Minimized;
             this.WindowState = FormWindowState.Maximized;
-            RevisarProfesor();
-            RevisaRA();
+
             MuestraPrivilegios();
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MostrarTabla();
-        }
-        private void MuestraPrivilegios() 
-        {
             if (perfil == 1 | perfil == 2)
             {
-                label3.Enabled = true;
-                label4.Enabled = true;
-                comboBox1.Enabled = true;
-                comboBox2.Enabled = true;
-                button3.Enabled = true;
+                dateTimePicker1.Enabled = true;
+                dataGridView1.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
 
-                label3.Visible = true;
-                label4.Visible = true;
-                comboBox1.Visible = true;
-                comboBox2.Visible = true;
-                button3.Visible = true;
+                AsignacionID();
+                RevisarAsistencias(asignacion);
+                RevisaRA(asignacion);
             }
-            else if (perfil == 0)
+            else
             {
-                label3.Enabled = false;
-                label4.Enabled = false;
-                comboBox1.Enabled = false;
-                comboBox2.Enabled = false;
-                button3.Enabled = false;
 
-                //label3.Visible = false;
-                //label4.Visible = false;
-                //comboBox1.Visible = false;
-                //comboBox2.Visible = false;
-                button3.Visible = false;
-
-                AsignacionDeLoginAlPrograma();
-                MostrarTabla();
             }
         }
+
         private void AsignacionDeLoginAlPrograma()
         {
             asignacionLogin = id_asignacion;
@@ -329,7 +310,7 @@ namespace Proyecto_Calificaciones
                             asistencia = "SI";
                             asistencia_justificada = "NO";
                         }
-                        else 
+                        else
                         {
                             asistencia = "NO";
                             asistencia_justificada = "NO";
@@ -367,16 +348,17 @@ namespace Proyecto_Calificaciones
                             bandera = true;
                             Conexion.Close();
                         }
-                        catch(Exception err)
+                        catch (Exception err)
                         {
                             MessageBox.Show("Hubo un error \n\n" + err);
                             bandera = false;
                         }
-                        
+
                     }
                     if (bandera == true)
                     {
                         RegistroDiario();
+                        BloquearRegistro();
                         MessageBox.Show("Se registraron las asistencias con éxito", "Alta asistencia");
 
                     }
@@ -392,11 +374,11 @@ namespace Proyecto_Calificaciones
 
             }
         }
-        private void RegistroDiario() 
+        private void RegistroDiario()
         {
             String fecha_corta = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
-            MySqlCommand comando1 = new MySqlCommand("INSERT INTO registro_asistencias values (@id_usuario, @fecha_corta)");
+            MySqlCommand comando1 = new MySqlCommand("INSERT INTO registro_asistencias values (@id_usuario, @fecha_corta, @id_asignacion)");
             comando1.Connection = Conexion;
 
             MySqlParameter parametro1 = new MySqlParameter();
@@ -409,29 +391,41 @@ namespace Proyecto_Calificaciones
             parametro2.Value = fecha_corta;
             comando1.Parameters.Add(parametro2);
 
+            MySqlParameter parametro3 = new MySqlParameter();
+            parametro3.ParameterName = "@id_asignacion";
+            parametro3.Value = asignacion;
+            comando1.Parameters.Add(parametro3);
+
             try
             {
                 Conexion.Open();
                 comando1.ExecuteNonQuery();
                 Conexion.Close();
             }
-            catch(Exception err) 
+            catch (Exception err)
             {
                 MessageBox.Show(err + "");
             }
         }
-        private void RevisarProfesor() 
+        private void RevisarAsistencias(int id_a)
         {
+            fecha_dt = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+
             String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
             Conexion.ConnectionString = CadenaConexion;
 
-            MySqlCommand comando2 = new MySqlCommand("Select id_usuario, DATE_FORMAT(fecha, '%d/%m/%Y') as fecha from registro_asistencias Where id_usuario = @id_usuario");
+            MySqlCommand comando2 = new MySqlCommand("SELECT DATE_FORMAT(fecha, '%d-%m-%Y') AS fecha, id_asignacion FROM registro_asistencias WHERE fecha = @fecha AND id_asignacion = @id_asignacion");
             comando2.Connection = Conexion;
 
             MySqlParameter parametro1 = new MySqlParameter();
-            parametro1.ParameterName = "@id_usuario";
-            parametro1.Value = usr1;
+            parametro1.ParameterName = "@fecha";
+            parametro1.Value = fecha_dt;
             comando2.Parameters.Add(parametro1);
+
+            MySqlParameter parametro2 = new MySqlParameter();
+            parametro2.ParameterName = "@id_asignacion";
+            parametro2.Value = id_a;
+            comando2.Parameters.Add(parametro2);
 
             Conexion.Open();
             MySqlDataReader myreader = comando2.ExecuteReader();
@@ -440,9 +434,10 @@ namespace Proyecto_Calificaciones
             {
                 while (myreader.Read())
                 {
-                    ra_usuario = myreader[0] + "";
-                    ra_fecha = myreader[1] + "";
+                    ra_fecha = myreader[0] + "";
+                    ra_idasignacion = (int)myreader[1];
                 }
+
             }
             else
             {
@@ -450,32 +445,83 @@ namespace Proyecto_Calificaciones
             }
             Conexion.Close();
         }
-        private void RevisaRA() 
+        private void RevisaRA(int id_a)
         {
-            fecha_dt = dateTimePicker1.Value.ToString("dd/MM/yyyy");
+            fecha_dt = dateTimePicker1.Value.ToString("dd-MM-yyyy");
 
-            if (usr1 == ra_usuario && ra_fecha == fecha_dt)
+            if (ra_fecha == fecha_dt && ra_idasignacion == id_a)
             {
-                dateTimePicker1.Enabled = false;
-                dataGridView1.Enabled = false;
-                label1.Enabled = false;
-                label2.Enabled = false;
+                if (perfil == 1 | perfil == 2)
+                {
+                    dateTimePicker1.Enabled = false;
+                    dataGridView1.Enabled = false;
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+
+                    MessageBox.Show("Ya has tomado asistencia para este grupo durante este día, si te equivocaste puedes modificar la asistencia en la opción correspondiente", "Advertencia");
+                }
+                else if (perfil == 0)
+                {
+                    dateTimePicker1.Enabled = false;
+                    dataGridView1.Enabled = false;
+                    label1.Enabled = false;
+                    label2.Enabled = false;
+                    label3.Enabled = false;
+                    label4.Enabled = false;
+                    comboBox1.Enabled = false;
+                    comboBox2.Enabled = false;
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+                    button3.Enabled = false;
+
+                    button3.Visible = false;
+
+                    MessageBox.Show("Ya has tomado asistencia para este grupo durante este día, si te equivocaste puedes modificar la asistencia en la opción correspondiente", "Advertencia");
+                }
+
+            }
+            else
+            {
+                if (perfil == 1 | perfil == 2)
+                {
+                    MostrarTabla();
+                }
+                else if (perfil == 0)
+                {
+                    AsignacionDeLoginAlPrograma();
+                    MostrarTabla();
+                }
+            }
+        }
+        private void MuestraPrivilegios()
+        {
+            if (perfil == 1 | perfil == 2)
+            {
+                label3.Enabled = true;
+                label4.Enabled = true;
+                comboBox1.Enabled = true;
+                comboBox2.Enabled = true;
+                button3.Enabled = true;
+
+                label3.Visible = true;
+                label4.Visible = true;
+                comboBox1.Visible = true;
+                comboBox2.Visible = true;
+                button3.Visible = true;
+            }
+            else if (perfil == 0)
+            {
                 label3.Enabled = false;
                 label4.Enabled = false;
                 comboBox1.Enabled = false;
                 comboBox2.Enabled = false;
-                button1.Enabled = false;
-                button2.Enabled = false;
                 button3.Enabled = false;
-
-                
                 button3.Visible = false;
 
-                MessageBox.Show("Ya has tomado asistencia este día, si te equivocaste puedes modificar la asistencia en la opción correspondiente", "Advertencia");
-            }
-            else 
-            { 
-                
+                RevisarAsistencias(id_asignacion);
+                RevisaRA(id_asignacion);
+                AsignacionDeLoginAlPrograma();
+                MostrarTabla();
             }
         }
 
@@ -487,6 +533,21 @@ namespace Proyecto_Calificaciones
         private void button2_Click(object sender, EventArgs e)
         {
             RegistrarAsistencias();
+        }
+        private void BloquearRegistro()
+        {
+            if (perfil == 1 | perfil == 2)
+            {
+
+            }
+            else if (perfil == 0)
+            {
+                label3.Enabled = false;
+                label4.Enabled = false;
+                comboBox1.Enabled = false;
+                comboBox2.Enabled = false;
+                button3.Enabled = false;
+            }
         }
     }
 }
