@@ -60,14 +60,13 @@ namespace Proyecto_Calificaciones
                 comboBox1.Enabled = true;
                 comboBox2.Enabled = true;
                 button3.Enabled = true;
-                btn_porcentaje.Enabled = true;
 
                 label3.Visible = true;
                 label4.Visible = true;
                 comboBox1.Visible = true;
                 comboBox2.Visible = true;
                 button3.Visible = true;
-                btn_porcentaje.Visible = true;
+                
 
             }
             else if (perfil == 0)
@@ -494,6 +493,8 @@ namespace Proyecto_Calificaciones
             AplicaPrivilegios();
             button1.Enabled = true;
             btn_Eliminar.Enabled = true;
+            btn_porcentaje.Enabled = true;
+            btn_porcentaje.Visible = true;
         }
 
         private void btn_porcentaje_Click(object sender, EventArgs e)
