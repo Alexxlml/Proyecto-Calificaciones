@@ -435,7 +435,7 @@
             this.Column13,
             this.Column14,
             this.Column15});
-            this.dataGridView4.Location = new System.Drawing.Point(701, 431);
+            this.dataGridView4.Location = new System.Drawing.Point(707, 431);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(551, 152);
             this.dataGridView4.TabIndex = 109;
@@ -481,6 +481,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 641);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btn_porcentaje);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox2);
@@ -492,7 +493,6 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView4);

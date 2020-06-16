@@ -533,14 +533,14 @@ namespace Proyecto_Calificaciones
                 Microsoft.Office.Interop.Excel.Application xcelApp = new Microsoft.Office.Interop.Excel.Application();
                 xcelApp.Application.Workbooks.Add(Type.Missing);
 
-                for (int i = 2; i < dataGridView4.Columns.Count + 1; i++)
+                for (int i = 1; i < dataGridView4.Columns.Count + 1; i++)
                 {
                     xcelApp.Cells[1, i] = dataGridView4.Columns[i - 1].HeaderText;
                 }
 
                 for (int i = 0; i < dataGridView4.Rows.Count; i++)
                 {
-                    for (int j = 1; j < dataGridView4.Columns.Count; j++)
+                    for (int j = 0; j < dataGridView4.Columns.Count; j++)
                     {
                         xcelApp.Cells[i + 2, j + 1] = dataGridView4.Rows[i].Cells[j].Value.ToString();
                     }
