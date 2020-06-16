@@ -73,6 +73,7 @@ namespace Proyecto_Calificaciones
             else
             {
                 Busqueda();
+                BuscaFoto();
             }
         }
         private void Busqueda()
@@ -375,6 +376,58 @@ namespace Proyecto_Calificaciones
 
             documento.Close();
             MessageBox.Show("El Kardex ha sido creado con éxito");
+        }
+        private void BuscaFoto() 
+        {
+            QueryBusqueda();
+            MySqlCommand comando;
+            MySqlDataAdapter da;
+
+            String seletQuery = query;
+            comando = new MySqlCommand(seletQuery, Conexion);
+
+            MySqlParameter parametro1 = new MySqlParameter();
+            parametro1.ParameterName = "@no_control";
+            parametro1.Value = control;
+            comando.Parameters.Add(parametro1);
+
+            MySqlParameter parametro2 = new MySqlParameter();
+            parametro2.ParameterName = "@no_tarjeta";
+            parametro2.Value = control;
+            comando.Parameters.Add(parametro2);
+
+            MySqlParameter parametro3 = new MySqlParameter();
+            parametro3.ParameterName = "@nombre_completo";
+            parametro3.Value = control;
+            comando.Parameters.Add(parametro3);
+
+            try
+            {
+                da = new MySqlDataAdapter(comando);
+
+                DataTable table = new DataTable();
+
+                da.Fill(table);
+
+                if (da == null)
+                {
+                    pictureBox1 = null;
+                }
+                else
+                {
+                    byte[] img = (byte[])table.Rows[0]["foto"];
+
+                    MemoryStream ms = new MemoryStream(img);
+
+                    pictureBox1.Image = System.Drawing.Image.FromStream(ms);
+
+                    da.Dispose();
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }
