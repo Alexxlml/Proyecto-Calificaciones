@@ -41,7 +41,7 @@ source script.sql;
 * Por último al abrir la solucion en VS2019 abre la opción **Editar** del menú superior, después **Buscar y reemplazar**, por último selecciona **Reemplazar en archivos**
 * Pega esta línea en el primer espacio:
 ```
-"Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m"
+"Server=localhost; User=root; Database=boletas; Password=azr4510m"
 ```
 
 En el segundo espacio copia y pega la misma pero cambiando el valor de **Password**
