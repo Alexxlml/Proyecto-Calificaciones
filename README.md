@@ -46,7 +46,7 @@ source script.sql;
 
 En el segundo espacio copia y pega la misma pero cambiando el valor de **Password**
 ```
-"Server=localhost; Port=3306; User id=root; Database=boletas; Password=tucontraseña"
+"Server=localhost; User=root; Database=boletas; Password=azr4510m;"
 ```
 
 ## Ejecutando las pruebas ⚙️
