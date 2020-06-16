@@ -71,7 +71,7 @@ namespace Proyecto_Calificaciones
         }
         private void ValidacionesInicio()
         {
-            Cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+            Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = Cadenaconexion;
 
             if (comboBox4.Text == "Subdirector")
@@ -194,7 +194,7 @@ namespace Proyecto_Calificaciones
         }
         private void ConfirmaAsignacion()
         {
-            Cadenaconexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = Cadenaconexion;
 
             MySqlCommand comando2 = new MySqlCommand("SELECT id_asignacion from usuarios where id_asignacion = @ID;");

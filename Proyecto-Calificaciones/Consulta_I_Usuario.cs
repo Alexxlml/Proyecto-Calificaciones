@@ -116,7 +116,7 @@ namespace Proyecto_Calificaciones
             }
             else
             {
-                Cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+                Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
                 Conexion.ConnectionString = Cadenaconexion;
 
                 MySqlCommand comando1 = new MySqlCommand("delete from usuarios where id_usuario= @id_usuario;");
@@ -190,7 +190,7 @@ namespace Proyecto_Calificaciones
         }
         private void ConsultaCorreos()
         {
-            Cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+            Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = Cadenaconexion;
 
             MySqlCommand comando1 = new MySqlCommand("Select id_usuario from usuarios");
@@ -219,7 +219,7 @@ namespace Proyecto_Calificaciones
         private void BuscarUsuario()
         {
             button5.Enabled = true;
-            Cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+            Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = Cadenaconexion;
 
             if (textBox1.Text == "")
@@ -522,7 +522,7 @@ namespace Proyecto_Calificaciones
             else
             {
 
-                Cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+                Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
                 Conexion.ConnectionString = Cadenaconexion;
 
                 if (comboBox4.Text == "Director" | comboBox4.Text == "Subdirector")
@@ -552,7 +552,7 @@ namespace Proyecto_Calificaciones
         }
         private void ConfirmaAsignacion()
         {
-            Cadenaconexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = Cadenaconexion;
 
             MySqlCommand comando2 = new MySqlCommand("SELECT id_asignacion from usuarios where id_asignacion = @ID;");

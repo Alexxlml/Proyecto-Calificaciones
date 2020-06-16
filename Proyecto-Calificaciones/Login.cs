@@ -52,7 +52,7 @@ namespace Proyecto_Calificaciones
                     usuario = textBox1.Text;
                     pass = textBox2.Text;
 
-                    cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+                    cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
                     conexion.ConnectionString = cadenaconexion;
 
                     MySqlCommand comando1 = new MySqlCommand("Select respuesta from usuarios where id_usuario='" + usuario + "'");

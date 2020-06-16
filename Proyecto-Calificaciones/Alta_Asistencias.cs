@@ -248,7 +248,7 @@ namespace Proyecto_Calificaciones
         {
             AsignacionID();
 
-            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            String CadenaConexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = CadenaConexion;
 
             MySqlCommand comandoconsulta = new MySqlCommand("select al.no_control, concat(al.apellidos,' ',al.nombre) as nombre, al.foto   " +
@@ -411,7 +411,7 @@ namespace Proyecto_Calificaciones
         {
             fecha_dt = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
-            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            String CadenaConexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = CadenaConexion;
 
             MySqlCommand comando2 = new MySqlCommand("SELECT DATE_FORMAT(fecha, '%d-%m-%Y') AS fecha, id_asignacion FROM registro_asistencias WHERE fecha = @fecha AND id_asignacion = @id_asignacion");

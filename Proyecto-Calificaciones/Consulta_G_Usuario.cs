@@ -41,7 +41,7 @@ namespace Proyecto_Calificaciones
         {
             String query = "SELECT u.id_usuario, u.nombre, a.grado, a.grupo, p.nombre_privilegios FROM usuarios u INNER JOIN asignacion a ON u.id_asignacion = a.id_asignacion INNER JOIN privilegios p ON u.tipo_usuario = p.id_privilegios;";
 
-            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            String CadenaConexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = CadenaConexion;
 
             MySqlCommand comandoconsulta = new MySqlCommand(query);
@@ -81,7 +81,7 @@ namespace Proyecto_Calificaciones
                         dataGridView1.Rows.Remove(filaEliminar);
 
                         MySqlConnection Conexion = new MySqlConnection();
-                        String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+                        String CadenaConexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
                         Conexion.ConnectionString = CadenaConexion;
                         try
                         {

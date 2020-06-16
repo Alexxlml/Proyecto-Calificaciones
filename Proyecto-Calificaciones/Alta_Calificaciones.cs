@@ -186,7 +186,7 @@ namespace Proyecto_Calificaciones
         {
             String grado = comboBox1.Text;
 
-            Cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+            Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = Cadenaconexion;
 
             MySqlCommand comando1 = new MySqlCommand("select nombre from materias where grado = '" + grado + "';");
@@ -289,7 +289,7 @@ namespace Proyecto_Calificaciones
         {
             String nombre_materia_temp = comboBox5.Text;
 
-            Cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+            Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = Cadenaconexion;
 
             MySqlCommand comando1 = new MySqlCommand("select id_materia from materias where nombre = '" + nombre_materia_temp + "';");
@@ -315,7 +315,7 @@ namespace Proyecto_Calificaciones
         private void MostrarTabla(int id_a)
         {
 
-            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            String CadenaConexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = CadenaConexion;
 
             MySqlCommand comandoconsulta = new MySqlCommand("select al.no_control, CONCAT(al.apellidos,' ', al.nombre) as nombre, c.bloque1, c.bloque2, c.bloque3, c.bloque4, c.bloque5, c.observaciones " +

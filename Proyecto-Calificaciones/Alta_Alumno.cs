@@ -219,7 +219,7 @@ namespace Proyecto_Calificaciones
         }
         private void Validaciones()
         {
-            Cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+            Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = Cadenaconexion;
 
             if (textBox1.Text == "" | textBox2.Text == "" | textBox3.Text == "" | textBox4.Text == ""

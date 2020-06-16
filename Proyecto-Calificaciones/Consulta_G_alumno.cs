@@ -30,7 +30,7 @@ namespace Proyecto_Calificaciones
 
         private void MostrarTabla() 
         {
-            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            String CadenaConexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = CadenaConexion;
 
             MySqlCommand comandoconsulta = new MySqlCommand("SELECT al.no_control, al.no_tarjeta, al.apellidos, al.nombre, a.grado, a.grupo, al.foto FROM alumnos al INNER JOIN asignacion a ON	al.id_asignacion = a.id_asignacion;");
@@ -83,7 +83,7 @@ namespace Proyecto_Calificaciones
                         dataGridView1.Rows.Remove(filaEliminar);
 
                         MySqlConnection Conexion = new MySqlConnection();
-                        String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+                        String CadenaConexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
                         Conexion.ConnectionString = CadenaConexion;
                         try
                         {

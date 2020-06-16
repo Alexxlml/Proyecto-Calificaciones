@@ -36,7 +36,7 @@ namespace Proyecto_Calificaciones
                 String usuario = textBox1.Text;
                 MySqlConnection conexion = new MySqlConnection();
                 String cadenaconexion;
-                cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+                cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
                 conexion.ConnectionString = cadenaconexion;
                 MySqlCommand comando1 = new MySqlCommand("Select preg_recuperacion from usuarios where id_usuario='" + usuario + "'");
                 comando1.Connection = conexion;
@@ -68,7 +68,7 @@ namespace Proyecto_Calificaciones
                 {
                     String resp = textBox2.Text;
 
-                    cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+                    cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
                     MySqlCommand comando2 = new MySqlCommand(String.Format("select aes_decrypt(pass,sha('" + resp + "')) from usuarios where id_usuario='" + usuario + "';"));
                     conexion.ConnectionString = cadenaconexion;
                     comando2.Connection = conexion;

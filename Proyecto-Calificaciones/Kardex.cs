@@ -77,7 +77,7 @@ namespace Proyecto_Calificaciones
         }
         private void Busqueda()
         {
-            Cadenaconexion = "Server=localhost; Port=3306; User id=root; Database=boletas; Password=azr4510m";
+            Cadenaconexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = Cadenaconexion;
 
             if (textBox13.Text == "")
@@ -259,7 +259,7 @@ namespace Proyecto_Calificaciones
         private void MostrarTabla()
         {
 
-            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            String CadenaConexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = CadenaConexion;
 
             MySqlCommand comandoconsulta = new MySqlCommand("select m.nombre, c.bloque1, c.bloque2, c.bloque3, c.bloque4, c.bloque5, " +

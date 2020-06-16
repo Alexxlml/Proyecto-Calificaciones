@@ -44,7 +44,7 @@ namespace Proyecto_Calificaciones
         {
             fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
-            String CadenaConexion = "Server=localhost; User id=root; Database=boletas; Password=azr4510m;";
+            String CadenaConexion = "Server=localhost; User=root; Database=boletas; Password=azr4510m";
             Conexion.ConnectionString = CadenaConexion;
 
             MySqlCommand comandoconsulta = new MySqlCommand("SELECT al.no_control, CONCAT(al.apellidos,' ',al.nombre) as nombre, a.grado, a.grupo, asis.asistencia, asis.asistencia_justificada, asis.fecha, al.foto " +
